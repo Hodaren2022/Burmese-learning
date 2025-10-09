@@ -563,9 +563,9 @@ function App() {
     // 回退：使用 Google TTS via new Audio
     // 如果在本機開發環境，指向我們的 proxy endpoint，避免瀏覽器直接向 Google TTS 發生格式或 CORS 問題
     const isLocal = window && window.location && (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1');
-    const url = (isLocal && ttsPort)
+    const url = isLocal && ttsPort
       ? `http://localhost:${ttsPort}/tts?q=${encodeURIComponent(textToSpeak)}`
-      : `https://translate.google.com/translate_tts?ie=UTF-8&q=${encodeURIComponent(textToSpeak)}&tl=my&client=tw-ob`;
+      : `/.netlify/functions/tts?q=${encodeURIComponent(textToSpeak)}`;
 
     try {
       console.log('speak(): trying Audio fallback with url', url);

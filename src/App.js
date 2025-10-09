@@ -556,8 +556,16 @@ function App() {
     // 如果在本機開發環境，指向我們的 proxy endpoint，避免瀏覽器直接向 Google TTS 發生格式或 CORS 問題
     // 在 Netlify 上也使用 proxy endpoint
     const isLocal = window && window.location && (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1');
-    const isNetlify = window && window.location && window.location.hostname.includes('netlify');
+    const isNetlify = window && window.location && (window.location.hostname.includes('netlify') || window.location.hostname.includes('-burmese'));
     const useProxy = isLocal || isNetlify;
+    
+    // 調試信息
+    console.log('Environment detection:', {
+      hostname: window?.location?.hostname,
+      isLocal,
+      isNetlify,
+      useProxy
+    });
     
     const url = useProxy
       ? isLocal 
@@ -570,13 +578,30 @@ function App() {
       // Re-using the same audio element is often more reliable.
       if (audioRef.current) {
         audioRef.current.src = url;
-        audioRef.current.play().catch((e) => console.warn('audioRef play failed', e));
+        audioRef.current.play().catch((e) => {
+          console.warn('audioRef play failed', e);
+          // 如果代理失敗，嘗試直接使用 Google TTS
+          if (useProxy) {
+            const directUrl = `https://translate.google.com/translate_tts?ie=UTF-8&q=${encodeURIComponent(textToSpeak)}&tl=my&client=tw-ob`;
+            console.log('Trying direct Google TTS as fallback:', directUrl);
+            audioRef.current.src = directUrl;
+            audioRef.current.play().catch((e2) => console.warn('Direct Google TTS also failed', e2));
+          }
+        });
       } else {
         // As a fallback, create a new audio element.
         const a = new Audio(url);
         a.volume = 0.98;
         a.play().catch((err) => {
-            console.warn('New Audio() fallback play() rejected.', err);
+          console.warn('New Audio() fallback play() rejected.', err);
+          // 如果代理失敗，嘗試直接使用 Google TTS
+          if (useProxy) {
+            const directUrl = `https://translate.google.com/translate_tts?ie=UTF-8&q=${encodeURIComponent(textToSpeak)}&tl=my&client=tw-ob`;
+            console.log('Trying direct Google TTS as fallback:', directUrl);
+            const a2 = new Audio(directUrl);
+            a2.volume = 0.98;
+            a2.play().catch((e2) => console.warn('Direct Google TTS also failed', e2));
+          }
         });
       }
     } catch (e) {

@@ -554,9 +554,15 @@ function App() {
 
     // 回退：使用 Google TTS via new Audio
     // 如果在本機開發環境，指向我們的 proxy endpoint，避免瀏覽器直接向 Google TTS 發生格式或 CORS 問題
+    // 在 Netlify 上也使用 proxy endpoint
     const isLocal = window && window.location && (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1');
-    const url = isLocal
-      ? `http://localhost:${config.TTS_PORT}/tts?q=${encodeURIComponent(textToSpeak)}`
+    const isNetlify = window && window.location && window.location.hostname.includes('netlify');
+    const useProxy = isLocal || isNetlify;
+    
+    const url = useProxy
+      ? isLocal 
+        ? `http://localhost:${config.TTS_PORT}/tts?q=${encodeURIComponent(textToSpeak)}`
+        : `/tts?q=${encodeURIComponent(textToSpeak)}`  // Netlify function path
       : `https://translate.google.com/translate_tts?ie=UTF-8&q=${encodeURIComponent(textToSpeak)}&tl=my&client=tw-ob`;
 
     try {

@@ -1,7 +1,16 @@
 import React, { useRef, useState, useEffect } from 'react';
 import './App.css';
 import vocab from './data/vocab.json';
-import config from './config.json';
+
+let config = { TTS_PORT: 3001 }; // Default config
+
+if (process.env.NODE_ENV === 'development') {
+  try {
+    config = require('./config.json');
+  } catch (e) {
+    console.warn('Could not load config.json during development, using default port 3001.');
+  }
+}
 
 function App() {
   const audioRef = useRef(null);

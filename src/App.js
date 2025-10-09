@@ -1,4 +1,4 @@
-import React, { useRef, useState, useEffect } from 'react';
+import React, { useRef, useState, useEffect, useCallback } from 'react';
 import './App.css';
 import vocab from './data/vocab.json';
 
@@ -11,7 +11,7 @@ function App() {
 
   // --- Start of Optimizations ---
 
-  const preloadAudio = (textToSpeak) => {
+  const preloadAudio = useCallback((textToSpeak) => {
     if (!textToSpeak) return;
 
     // Don't preload if a native browser voice is available, as it's fast enough.
@@ -27,8 +27,9 @@ function App() {
     // Create a new Audio object to trigger the download.
     // We don't need to keep a reference. The browser handles caching based on the URL.
     new Audio(url);
-  };
+  }, [ttsPort]);
 
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() => {
     if (!('IntersectionObserver' in window)) {
       console.warn('IntersectionObserver not supported, skipping viewport preloading.');
@@ -48,12 +49,14 @@ function App() {
       });
     }, { rootMargin: '200px' }); // Start preloading when an item is 200px away from the viewport
 
+    const currentObserver = observer.current;
+
     return () => {
-      if (observer.current) {
-        observer.current.disconnect();
+      if (currentObserver) {
+        currentObserver.disconnect();
       }
     };
-  }, [ttsPort]); // Rerun if ttsPort changes
+  }, [preloadAudio]);
 
   const observeElement = (element) => {
     if (element && observer.current) {
@@ -76,7 +79,7 @@ function App() {
           });
       }
     }
-  }, []);
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   useEffect(() => {
     const unlockAudio = () => {
@@ -192,6 +195,28 @@ function App() {
     }
   }, [categories, selectedCategory]);
 
+  function playBeep() {
+    try {
+      const AudioContext = window.AudioContext || window.webkitAudioContext;
+      const audioContext = new AudioContext();
+      if (audioContext.state === 'suspended') audioContext.resume();
+
+      const oscillator = audioContext.createOscillator();
+      const gainNode = audioContext.createGain();
+
+      oscillator.connect(gainNode);
+      gainNode.connect(audioContext.destination);
+
+      gainNode.gain.setValueAtTime(0.1, audioContext.currentTime);
+      oscillator.frequency.setValueAtTime(440, audioContext.currentTime); // A4 pitch
+
+      oscillator.start();
+      oscillator.stop(audioContext.currentTime + 0.3); // Beep for 300ms
+    } catch (e) {
+      console.warn('Web Audio API is not supported by this browser.', e);
+    }
+  }
+
   function speak(textToSpeak) {
     if (!textToSpeak) return;
 
@@ -278,8 +303,11 @@ function App() {
                   className="play-sentence-btn" 
                   onClick={() => playFullSentence(s)} 
                   onMouseEnter={() => preloadAudio(s.burmese)} // Preload on hover
-                  aria-label="播放句子">
-                  播放句子
+                  aria-label="播放完整句子">
+                  <svg xmlns="http://www.w3.org/2000/svg" style={{ width: '18px', height: '18px', marginRight: '8px' }} viewBox="0 0 20 20" fill="currentColor">
+                    <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z" clipRule="evenodd" />
+                  </svg>
+                  播放完整句子
                 </button>
               </div>
             </div>
@@ -299,6 +327,7 @@ function App() {
           <div className="app-nav">
             <button className={`nav-btn ${page === 'alphabet' ? 'active' : ''}`} onClick={() => setPage('alphabet')} aria-label="字母頁">字母表</button>
             <button className={`nav-btn ${page === 'sentences' ? 'active' : ''}`} onClick={() => setPage('sentences')} aria-label="句子頁">例句</button>
+            <button className="nav-btn" onClick={playBeep} aria-label="測試發音">測試發音</button>
           </div>
         </header>
 

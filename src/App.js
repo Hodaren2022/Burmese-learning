@@ -298,7 +298,7 @@ function App() {
       { burmese: 'သူ', roman: 'thu', translation: '他/她 (He/She)', words: [{ my: 'သူ', roman: 'thu', translation: '他/她', audio_my: 'သူ' }] },
       { burmese: 'ငါတို့', roman: 'nga do', translation: '我們 (We)', words: [{ my: 'ငါ', roman: 'nga', translation: '我', audio_my: 'ငါ' }, { my: 'တို့', roman: 'do', translation: '們', audio_my: 'တို့' }] },
       { burmese: 'သင်တို့', roman: 'thang do', translation: '你們 (You all)', words: [{ my: 'သင်', roman: 'thang', translation: '你', audio_my: 'သင်' }, { my: 'တို့', roman: 'do', translation: '們', audio_my: 'တို့' }] },
-      { burmese: 'သူတို့', roman: 'thu do', translation: '他們/她們 (They)', words: [{ my: 'သူ', roman: 'thu', translation: '他/她', audio_my: 'သူ' }, { my: 'တို့', roman: 'do', translation: '們', audio_my: 'တို့' }] }
+      { burmese: 'သူတို့', roman: 'thu do', translation: 'พวกเขา/她們 (They)', words: [{ my: 'သူ', roman: 'thu', translation: '他/她', audio_my: 'သူ' }, { my: 'တို့', roman: 'do', translation: '們', audio_my: 'တို့' }] }
     ],
     '指示代詞 (Demonstratives)': [
       { burmese: 'ဒါ', roman: 'da', translation: '這個 (This)', words: [{ my: 'ဒါ', roman: 'da', translation: '這個', audio_my: 'ဒါ' }] },
@@ -355,7 +355,7 @@ function App() {
       { burmese: 'ဘယ်လို?', roman: 'be lo?', translation: '誰？ (Who?)', words: [{ my: 'ဘယ်လို', roman: 'be lo', translation: '怎樣', audio_my: 'ဘယ်လို' }] },
       { burmese: 'ဘယ်လို?', roman: 'be lo?', translation: '哪裡？ (Where?)', words: [{ my: 'ဘယ်လို', roman: 'be lo', translation: '怎樣', audio_my: 'ဘယ်လို' }] },
       { burmese: 'ဘယ်လိုခွဲခြားလဲ?', roman: 'be lo hkwai khe la?', translation: '什麼時候？ (When?)', words: [{ my: 'ဘယ်လို', roman: 'be lo', translation: '怎樣', audio_my: 'ဘယ်လို' }, { my: 'ခွဲ', roman: 'hkwai', translation: '分開', audio_my: 'ခွဲ' }, { my: 'ခြား', roman: 'khe', translation: '區別', audio_my: 'ခြား' }, { my: 'လဲ', roman: 'la', translation: '疑問詞', audio_my: 'လဲ' }] },
-      { burmese: 'ငါမသိတယ်', roman: 'nga ma sit de', translation: "我不知道 (I\'m not sure)", words: [{ my: 'ငါ', roman: 'nga', translation: '我', audio_my: 'ငါ' }, { my: 'မ', roman: 'ma', translation: '否定', audio_my: 'မ' }, { my: 'သိ', roman: 'sit', translation: '知道', audio_my: 'သိ' }, { my: 'တယ်', roman: 'de', translation: '助詞', audio_my: 'တယ်' }] },
+      { burmese: 'ငါမသိတယ်', roman: 'nga ma sit de', translation: "我不知道 (I'm not sure)", words: [{ my: 'ငါ', roman: 'nga', translation: '我', audio_my: 'ငါ' }, { my: 'မ', roman: 'ma', translation: '否定', audio_my: 'မ' }, { my: 'သိ', roman: 'sit', translation: '知道', audio_my: 'သိ' }, { my: 'တယ်', roman: 'de', translation: '助詞', audio_my: 'တယ်' }] },
       { burmese: 'ဒါဘယ်လိုလဲ?', roman: 'da be lo le?', translation: '這是什麼？ (What is this?)', words: [{ my: 'ဒါ', roman: 'da', translation: '這', audio_my: 'ဒါ' }, { my: 'ဘယ်လို', roman: 'be lo', translation: '怎樣', audio_my: 'ဘယ်လို' }, { my: 'လဲ', roman: 'le', translation: '疑問詞', audio_my: 'လဲ' }] },
       { burmese: 'ဟိုဘယ်လိုလဲ?', roman: 'ho be lo le?', translation: '那是什麼？ (What is that?)', words: [{ my: 'ဟို', roman: 'ho', translation: '那', audio_my: 'ဟို' }, { my: 'ဘယ်လို', roman: 'be lo', translation: '怎樣', audio_my: 'ဘယ်လို' }, { my: 'လဲ', roman: 'le', translation: '疑問詞', audio_my: 'လဲ' }] },
       { burmese: 'ဘယ်လောက်?', roman: 'be laut?', translation: '多少？ (How much?)', words: [{ my: 'ဘယ်လောက်', roman: 'be laut', translation: '多少', audio_my: 'ဘယ်လောက်' }] },
@@ -608,10 +608,6 @@ function App() {
   function handleLetterClick(letter) {
     updateDisplay(letter.burmese, letter.roman);
     speak(letter.burmese);
-  }
-
-  function handleWordClick(word) {
-    speak(word);
   }
 
   function playFullSentence(sentence) {

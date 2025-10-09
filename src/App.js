@@ -1,12 +1,27 @@
 import React, { useRef, useState, useEffect } from 'react';
 import './App.css';
 import vocab from './data/vocab.json';
-import config from './config.json';
 
 function App() {
   const audioRef = useRef(null);
   const [selected, setSelected] = useState({ burmese: 'က', roman: 'ka' });
   const [page, setPage] = useState('alphabet');
+  const [ttsPort, setTtsPort] = useState(null);
+
+  useEffect(() => {
+    // In development, dynamically import the config file to get the TTS proxy port.
+    // This file is git-ignored, so this allows the production build to succeed without it.
+    const isLocal = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
+    if (isLocal) {
+      import('./config.json')
+        .then(configModule => {
+          setTtsPort(configModule.default.TTS_PORT);
+        })
+        .catch(err => {
+          console.warn("Could not load config.json for local TTS proxy.", err);
+        });
+    }
+  }, []); // Run only once on component mount.
 
   useEffect(() => {
     const unlockAudio = () => {
@@ -546,8 +561,8 @@ function App() {
     // 回退：使用 Google TTS via new Audio
     // 如果在本機開發環境，指向我們的 proxy endpoint，避免瀏覽器直接向 Google TTS 發生格式或 CORS 問題
     const isLocal = window && window.location && (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1');
-    const url = isLocal
-      ? `http://localhost:${config.TTS_PORT}/tts?q=${encodeURIComponent(textToSpeak)}`
+    const url = (isLocal && ttsPort)
+      ? `http://localhost:${ttsPort}/tts?q=${encodeURIComponent(textToSpeak)}`
       : `https://translate.google.com/translate_tts?ie=UTF-8&q=${encodeURIComponent(textToSpeak)}&tl=my&client=tw-ob`;
 
     try {

@@ -553,62 +553,82 @@ function App() {
     }
 
     // 回退：使用 Google TTS via new Audio
-    // 如果在本機開發環境，指向我們的 proxy endpoint，避免瀏覽器直接向 Google TTS 發生格式或 CORS 問題
-    // 在 Netlify 上也使用 proxy endpoint
+    // 智能選擇 TTS 端點，根據環境自動適應
     const isLocal = window && window.location && (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1');
-    const isNetlify = window && window.location && (window.location.hostname.includes('netlify') || window.location.hostname.includes('-burmese'));
-    const useProxy = isLocal || isNetlify;
+    const isNetlify = window && window.location && (window.location.hostname.includes('netlify.app'));
     
+    // 生成可能的 TTS URLs（按優先級排序）
+    const urlsToTry = [
+      // 首選：本地開發環境的代理
+      isLocal ? `http://localhost:${config.TTS_PORT}/tts?q=${encodeURIComponent(textToSpeak)}` : null,
+      // 次選：Netlify 函數端點（僅在 Netlify 環境中）
+      isNetlify ? `/tts?q=${encodeURIComponent(textToSpeak)}` : null,
+      // 備用：Netlify 函數端點（完整路徑，僅在 Netlify 環境中）
+      isNetlify ? `/.netlify/functions/tts?q=${encodeURIComponent(textToSpeak)}` : null,
+      // 最後備選：直接 Google TTS（可能因 CORS 被阻止）
+      `https://translate.google.com/translate_tts?ie=UTF-8&q=${encodeURIComponent(textToSpeak)}&tl=my&client=tw-ob`
+    ].filter(url => url !== null); // 過濾掉 null 值
+
     // 調試信息
     console.log('Environment detection:', {
       hostname: window?.location?.hostname,
       isLocal,
-      isNetlify,
-      useProxy
+      isNetlify
     });
-    
-    // 生成多個可能的 URLs 來嘗試
-    const urlsToTry = [
-      useProxy
-        ? isLocal 
-          ? `http://localhost:${config.TTS_PORT}/tts?q=${encodeURIComponent(textToSpeak)}`
-          : `/tts?q=${encodeURIComponent(textToSpeak)}`  // Netlify function path
-        : null,
-      useProxy
-        ? `/.netlify/functions/tts?q=${encodeURIComponent(textToSpeak)}`  // Netlify function full path
-        : null,
-      `https://translate.google.com/translate_tts?ie=UTF-8&q=${encodeURIComponent(textToSpeak)}&tl=my&client=tw-ob`  // Direct Google TTS
-    ].filter(url => url !== null); // 過濾掉 null 值
-
     console.log('TTS URLs to try:', urlsToTry);
 
     // 嘗試播放音訊的函數
-    const tryPlayUrl = (url) => {
+    const tryPlayUrl = (url, index) => {
+      console.log(`Trying TTS URL[${index}]:`, url);
       return new Promise((resolve, reject) => {
         const audio = audioRef.current || new Audio();
         audio.src = url;
-        audio.oncanplaythrough = () => resolve({ audio, url });
-        audio.onerror = (e) => reject({ error: e, url });
+        
+        // 添加更多的事件監聽器來調試
+        audio.oncanplaythrough = () => {
+          console.log(`Audio can play through URL[${index}]:`, url);
+          resolve({ audio, url, index });
+        };
+        
+        audio.onloadeddata = () => {
+          console.log(`Audio data loaded URL[${index}]:`, url);
+        };
+        
+        audio.onplay = () => {
+          console.log(`Audio started playing URL[${index}]:`, url);
+        };
+        
+        audio.onerror = (e) => {
+          console.warn(`Audio error for URL[${index}]:`, url, e);
+          reject({ error: e, url, index });
+        };
+        
         const playPromise = audio.play();
         if (playPromise) {
-          playPromise.catch(e => reject({ error: e, url }));
+          playPromise.catch(e => {
+            console.warn(`Audio play rejected for URL[${index}]:`, url, e);
+            reject({ error: e, url, index });
+          });
         }
       });
     };
 
     // 依次嘗試所有 URLs
     const tryAllUrls = async (urls) => {
-      for (const url of urls) {
+      for (let i = 0; i < urls.length; i++) {
         try {
-          console.log('Trying TTS URL:', url);
-          const result = await tryPlayUrl(url);
-          console.log('Successfully played audio with URL:', result.url);
+          const result = await tryPlayUrl(urls[i], i);
+          console.log(`Successfully played audio with URL[${result.index}]:`, result.url);
           return result;
         } catch (error) {
-          console.warn('Failed to play with URL:', url, error);
+          console.warn(`Failed to play with URL[${i}]:`, urls[i], error);
+          // 如果是最後一個 URL，則拋出錯誤
+          if (i === urls.length - 1) {
+            throw new Error(`All TTS URLs failed. Last error: ${error.message}`);
+          }
+          // 否則繼續嘗試下一個 URL
         }
       }
-      throw new Error('All TTS URLs failed');
     };
 
     // 執行播放嘗試

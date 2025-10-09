@@ -1,16 +1,22 @@
 const https = require('https');
-const url = require('url');
+
+// In-memory cache. Persists between warm function invocations.
+const cache = new Map();
 
 exports.handler = async (event, context) => {
   const textToSpeak = event.queryStringParameters.q;
 
   if (!textToSpeak) {
-    return {
-      statusCode: 400,
-      body: 'Missing query parameter: q',
-    };
+    return { statusCode: 400, body: 'Missing query parameter: q' };
   }
 
+  // 1. Check cache first
+  if (cache.has(textToSpeak)) {
+    console.log(`[Cache HIT] Serving: ${textToSpeak}`);
+    return cache.get(textToSpeak);
+  }
+
+  console.log(`[Cache MISS] Fetching from Google: ${textToSpeak}`);
   const ttsUrl = `https://translate.google.com/translate_tts?ie=UTF-8&q=${encodeURIComponent(textToSpeak)}&tl=my&client=tw-ob`;
 
   return new Promise((resolve, reject) => {
@@ -21,7 +27,6 @@ exports.handler = async (event, context) => {
       }
     }, (proxyResponse) => {
       
-      // Check for non-200 responses from Google
       if (proxyResponse.statusCode < 200 || proxyResponse.statusCode >= 300) {
         return reject({
           statusCode: proxyResponse.statusCode,
@@ -29,21 +34,29 @@ exports.handler = async (event, context) => {
         });
       }
 
-      let body = [];
+      const body = [];
       proxyResponse.on('data', (chunk) => {
         body.push(chunk);
       });
 
       proxyResponse.on('end', () => {
         const audioBuffer = Buffer.concat(body);
-        resolve({
+        const response = {
           statusCode: 200,
           headers: {
             'Content-Type': 'audio/mpeg',
+            // Add aggressive browser caching
+            'Cache-Control': 'public, max-age=31536000, immutable',
           },
           body: audioBuffer.toString('base64'),
           isBase64Encoded: true,
-        });
+        };
+
+        // 2. Store in cache for future requests
+        cache.set(textToSpeak, response);
+        console.log(`[Cache SET] Stored: ${textToSpeak}`);
+
+        resolve(response);
       });
     });
 

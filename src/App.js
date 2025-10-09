@@ -11,15 +11,17 @@ function App() {
   useEffect(() => {
     // In development, dynamically import the config file to get the TTS proxy port.
     // This file is git-ignored, so this allows the production build to succeed without it.
-    const isLocal = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
-    if (isLocal) {
-      import('./config.json')
-        .then(configModule => {
-          setTtsPort(configModule.default.TTS_PORT);
-        })
-        .catch(err => {
-          console.warn("Could not load config.json for local TTS proxy.", err);
-        });
+    if (process.env.NODE_ENV !== 'production') {
+      const isLocal = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
+      if (isLocal) {
+        import('./config.json')
+          .then(configModule => {
+            setTtsPort(configModule.default.TTS_PORT);
+          })
+          .catch(err => {
+            console.warn("Could not load config.json for local TTS proxy.", err);
+          });
+      }
     }
   }, []); // Run only once on component mount.
 

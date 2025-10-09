@@ -567,46 +567,54 @@ function App() {
       useProxy
     });
     
-    const url = useProxy
-      ? isLocal 
-        ? `http://localhost:${config.TTS_PORT}/tts?q=${encodeURIComponent(textToSpeak)}`
-        : `/tts?q=${encodeURIComponent(textToSpeak)}`  // Netlify function path
-      : `https://translate.google.com/translate_tts?ie=UTF-8&q=${encodeURIComponent(textToSpeak)}&tl=my&client=tw-ob`;
+    // 生成多個可能的 URLs 來嘗試
+    const urlsToTry = [
+      useProxy
+        ? isLocal 
+          ? `http://localhost:${config.TTS_PORT}/tts?q=${encodeURIComponent(textToSpeak)}`
+          : `/tts?q=${encodeURIComponent(textToSpeak)}`  // Netlify function path
+        : null,
+      useProxy
+        ? `/.netlify/functions/tts?q=${encodeURIComponent(textToSpeak)}`  // Netlify function full path
+        : null,
+      `https://translate.google.com/translate_tts?ie=UTF-8&q=${encodeURIComponent(textToSpeak)}&tl=my&client=tw-ob`  // Direct Google TTS
+    ].filter(url => url !== null); // 過濾掉 null 值
 
-    try {
-      console.log('speak(): trying Audio fallback with url', url);
-      // Re-using the same audio element is often more reliable.
-      if (audioRef.current) {
-        audioRef.current.src = url;
-        audioRef.current.play().catch((e) => {
-          console.warn('audioRef play failed', e);
-          // 如果代理失敗，嘗試直接使用 Google TTS
-          if (useProxy) {
-            const directUrl = `https://translate.google.com/translate_tts?ie=UTF-8&q=${encodeURIComponent(textToSpeak)}&tl=my&client=tw-ob`;
-            console.log('Trying direct Google TTS as fallback:', directUrl);
-            audioRef.current.src = directUrl;
-            audioRef.current.play().catch((e2) => console.warn('Direct Google TTS also failed', e2));
-          }
-        });
-      } else {
-        // As a fallback, create a new audio element.
-        const a = new Audio(url);
-        a.volume = 0.98;
-        a.play().catch((err) => {
-          console.warn('New Audio() fallback play() rejected.', err);
-          // 如果代理失敗，嘗試直接使用 Google TTS
-          if (useProxy) {
-            const directUrl = `https://translate.google.com/translate_tts?ie=UTF-8&q=${encodeURIComponent(textToSpeak)}&tl=my&client=tw-ob`;
-            console.log('Trying direct Google TTS as fallback:', directUrl);
-            const a2 = new Audio(directUrl);
-            a2.volume = 0.98;
-            a2.play().catch((e2) => console.warn('Direct Google TTS also failed', e2));
-          }
-        });
+    console.log('TTS URLs to try:', urlsToTry);
+
+    // 嘗試播放音訊的函數
+    const tryPlayUrl = (url) => {
+      return new Promise((resolve, reject) => {
+        const audio = audioRef.current || new Audio();
+        audio.src = url;
+        audio.oncanplaythrough = () => resolve({ audio, url });
+        audio.onerror = (e) => reject({ error: e, url });
+        const playPromise = audio.play();
+        if (playPromise) {
+          playPromise.catch(e => reject({ error: e, url }));
+        }
+      });
+    };
+
+    // 依次嘗試所有 URLs
+    const tryAllUrls = async (urls) => {
+      for (const url of urls) {
+        try {
+          console.log('Trying TTS URL:', url);
+          const result = await tryPlayUrl(url);
+          console.log('Successfully played audio with URL:', result.url);
+          return result;
+        } catch (error) {
+          console.warn('Failed to play with URL:', url, error);
+        }
       }
-    } catch (e) {
-      console.warn('Audio fallback creation failed.', e);
-    }
+      throw new Error('All TTS URLs failed');
+    };
+
+    // 執行播放嘗試
+    tryAllUrls(urlsToTry).catch((error) => {
+      console.error('All TTS URLs failed to play audio:', error);
+    });
   }
 
   // 測試使用 WebAudio 產生簡短的測試音，用來確認頁面音訊輸出是否正常

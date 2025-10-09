@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>緬甸語字母與例句學習板</title>
+    <!-- 引入 Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- 引入 Google Fonts: Inter (UI) 和 Noto Sans Myanmar (緬甸語) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&family=Noto+Sans+Myanmar:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        /* 將 Noto Sans Myanmar 設為緬甸語文字的優先字體 */
+        body {
+            font-family: 'Inter', sans-serif;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+        .font-myanmar {
+            font-family: 'Noto Sans Myanmar', sans-serif;
+        }
+        .hidden {
+            display: none;
+        }
+    </style>
+</head>
+<body class="bg-slate-100 dark:bg-slate-900 text-slate-800 dark:text-slate-200 flex items-center justify-center min-h-screen p-4">
+
+    <div class="w-full max-w-4xl mx-auto">
+        <header class="text-center mb-8">
+            <h1 class="text-4xl md:text-5xl font-bold text-teal-600 dark:text-teal-400 font-myanmar">သင်ပုန်းကြီး</h1>
+            <p class="text-xl md:text-2xl font-bold mt-2">緬甸語字母與例句學習板</p>
+            
+            <!-- 新增導航選單 -->
+            <nav class="mt-4 flex justify-center space-x-4">
+                <button id="nav-alphabet" class="px-4 py-2 rounded-lg font-medium text-white bg-teal-600 hover:bg-teal-700 transition-colors duration-200">字母學習</button>
+                <button id="nav-sentences" class="px-4 py-2 rounded-lg font-medium text-slate-700 dark:text-slate-300 bg-slate-200 dark:bg-slate-700 hover:bg-slate-300 dark:hover:bg-slate-600 transition-colors duration-200">例句學習</button>
+            </nav>
+        </header>
+
+        <main>
+            <!-- 字母學習頁面 -->
+            <div id="alphabet-page">
+                <!-- 顯示選中字母資訊的區域 -->
+                <div id="display" class="bg-white dark:bg-slate-800 rounded-xl shadow-lg p-6 mb-8 h-40 flex flex-col justify-center items-center transition-all duration-300">
+                    <p id="display-char" class="font-myanmar text-6xl text-teal-500">-</p>
+                    <p id="display-roman" class="text-2xl mt-2 text-slate-500 dark:text-slate-400">請選擇一個字母</p>
+                </div>
+
+                <!-- 字母表網格 -->
+                <div id="alphabet-grid" class="grid grid-cols-4 sm:grid-cols-5 md:grid-cols-7 gap-3 md:gap-4">
+                    <!-- 字母按鈕將由 JavaScript 動態生成 -->
+                </div>
+            </div>
+
+            <!-- 例句學習頁面 (初始隱藏) -->
+            <div id="sentences-page" class="hidden">
+                <div id="sentence-container" class="space-y-6">
+                    <!-- 例句卡片將由 JavaScript 動態生成 -->
+                </div>
+            </div>
+
+            <!-- 用於播放音檔的隱藏元素 -->
+            <audio id="audio-player" class="hidden"></audio>
+
+        </main>
+        
+        <footer class="text-center mt-12 text-sm text-slate-500">
+            <p>一個基礎的緬甸語學習工具</p>
+        </footer>
+    </div>
+
+    <script>
+        // --- 資料區 ---
+        const consonants = [
+            { burmese: 'က', roman: 'ka' }, { burmese: 'ခ', roman: 'kha' },
+            { burmese: 'ဂ', roman: 'ga' }, { burmese: 'ဃ', roman: 'ga' },
+            { burmese: 'င', roman: 'nga' }, { burmese: 'စ', roman: 'sa' },
+            { burmese: 'ဆ', roman: 'hsa' }, { burmese: 'ဇ', roman: 'za' },
+            { burmese: 'ဈ', roman: 'za' }, { burmese: 'ည', roman: 'nya' },
+            { burmese: 'ဋ', roman: 'ta' }, { burmese: 'ဌ', roman: 'hta' },
+            { burmese: 'ဍ', roman: 'da' }, { burmese: 'ဎ', roman: 'da' },
+            { burmese: 'ဏ', roman: 'na' }, { burmese: 'တ', roman: 'ta' },
+            { burmese: 'ထ', roman: 'hta' }, { burmese: 'ဒ', roman: 'da' },
+            { burmese: 'ဓ', roman: 'da' }, { burmese: 'န', roman: 'na' },
+            { burmese: 'ပ', roman: 'pa' }, { burmese: 'ဖ', roman: 'hpa' },
+            { burmese: 'ဗ', roman: 'ba' }, { burmese: 'ဘ', roman: 'bha' },
+            { burmese: 'မ', roman: 'ma' }, { burmese: 'ယ', roman: 'ya' },
+            { burmese: 'ရ', roman: 'ya' }, { burmese: 'လ', roman: 'la' },
+            { burmese: 'ဝ', roman: 'wa' }, { burmese: 'သ', roman: 'tha' },
+            { burmese: 'ဟ', roman: 'ha' }, { burmese: 'ဠ', roman: 'la' },
+            { burmese: 'အ', roman: 'a' }
+        ];
+
+        // 新增例句資料，並按情境分類
+        const categorizedSentences = {
+            '基本問候 (Basic Greetings)': [
+                {
+                    burmese: 'မင်္ဂလာပါ',
+                    roman: 'mingalaabaa',
+                    translation: '你好 (Hello)',
+                    words: [
+                        { my: 'မင်္ဂလာ', roman: 'mingala', translation: '吉祥', audio_my: 'မင်္ဂလာ' },
+                        { my: 'ပါ', roman: 'paa', translation: '用於敬語', audio_my: 'ပါ' }
+                    ]
+                },
+                {
+                    burmese: 'ကျေးဇူးတင်ပါတယ်',
+                    roman: 'kyeizuutinbaade',
+                    translation: '謝謝 (Thank you)',
+                    words: [
+                        { my: 'ကျေးဇူး', roman: 'kyeizu', translation: '感謝', audio_my: 'ကျေးဇူး' },
+                        { my: 'တင်', roman: 'tin', translation: '表示致謝', audio_my: 'တင်' },
+                        { my: 'ပါ', roman: 'paa', translation: '敬語', audio_my: 'ပါ' },
+                        { my: 'တယ်', roman: 'de', translation: '助詞', audio_my: 'တယ်' }
+                    ]
+                },
+                {
+                    burmese: 'နေကောင်းလား',
+                    roman: 'ne-kaung-laa',
+                    translation: '你好嗎？ (How are you?)',
+                    words: [
+                        { my: 'နေ', roman: 'ne', translation: '居住/處於', audio_my: 'နေ' },
+                        { my: 'ကောင်း', roman: 'kaung', translation: '好', audio_my: 'ကောင်း' },
+                        { my: 'လား', roman: 'laa', translation: '疑問詞', audio_my: 'လား' }
+                    ]
+                },
+                {
+                    burmese: 'ကျွန်တော်/ကျွန်မ နာမည်က ... ပါ',
+                    roman: 'kyun-naw/kyun-ma na-me ka ... ba',
+                    translation: '我的名字是... (My name is...)',
+                    words: [
+                        { my: 'ကျွန်တော်', roman: 'kyun-naw', translation: '我 (男性)', audio_my: 'ကျွန်တော်' },
+                        { my: 'ကျွန်မ', roman: 'kyun-ma', translation: '我 (女性)', audio_my: 'ကျွန်မ' },
+                        { my: 'နာမည်', roman: 'na-me', translation: '名字', audio_my: 'နာမည်' },
+                        { my: 'က', roman: 'ka', translation: '助詞', audio_my: 'က' },
+                        { my: '... ပါ', roman: '... ba', translation: '是', audio_my: 'ပါ' }
+                    ]
+                }
+            ],
+            '購物 (Shopping)': [
+                {
+                    burmese: 'ဒါဘယ်လောက်လဲ',
+                    roman: 'daa-belaut-lae',
+                    translation: '這個多少錢？ (How much is this?)',
+                    words: [
+                        { my: 'ဒါ', roman: 'daa', translation: '這個', audio_my: 'ဒါ' },
+                        { my: 'ဘယ်လောက်', roman: 'belaut', translation: '多少', audio_my: 'ဘယ်လောက်' },
+                        { my: 'လဲ', roman: 'lae', translation: '疑問詞', audio_my: 'လဲ' }
+                    ]
+                },
+                {
+                    burmese: 'စျေးလျှော့ပေးပါ',
+                    roman: 'zye-shaut-pe-ba',
+                    translation: '請打折 (Please give a discount)',
+                    words: [
+                        { my: 'စျေး', roman: 'zye', translation: '價格', audio_my: 'စျေး' },
+                        { my: 'လျှော့', roman: 'shaut', translation: '減少/打折', audio_my: 'လျှော့' },
+                        { my: 'ပေး', roman: 'pe', translation: '給予', audio_my: 'ပေး' },
+                        { my: 'ပါ', roman: 'ba', translation: '禮貌用詞', audio_my: 'ပါ' }
+                    ]
+                },
+                {
+                    burmese: 'စျေးဝယ်ထွက်တာ',
+                    roman: 'zye-we-thwet-daa',
+                    translation: '我去購物',
+                    words: [
+                        { my: 'စျေးဝယ်', roman: 'zye-we', translation: '購物', audio_my: 'စျေးဝယ်' },
+                        { my: 'ထွက်', roman: 'thwet', translation: '出去', audio_my: 'ထွက်' },
+                        { my: 'တာ', roman: 'da', translation: '助詞', audio_my: 'တာ' }
+                    ]
+                },
+                {
+                    burmese: 'ဒီဟာကို ယူမယ်',
+                    roman: 'di-haa go yu-me',
+                    translation: '我要這個',
+                    words: [
+                        { my: 'ဒီဟာ', roman: 'di-haa', translation: '這個東西', audio_my: 'ဒီဟာ' },
+                        { my: 'ကို', roman: 'go', translation: '受格助詞', audio_my: 'ကို' },
+                        { my: 'ယူ', roman: 'yu', translation: '拿/要', audio_my: 'ယူ' },
+                        { my: 'မယ်', roman: 'me', translation: '未來式/意願', audio_my: 'မယ်' }
+                    ]
+                }
+            ],
+            '方向與地點 (Directions and Places)': [
+                {
+                    burmese: 'အိမ်ဘယ်မှာလဲ',
+                    roman: 'einbehmaale',
+                    translation: '家在哪裡？ (Where is home?)',
+                    words: [
+                        { my: 'အိမ်', roman: 'ein', translation: '家', audio_my: 'အိမ်' },
+                        { my: 'ဘယ်', roman: 'be', translation: '哪裡', audio_my: 'ဘယ်' },
+                        { my: 'မှာ', roman: 'hmaa', translation: '在', audio_my: 'မှာ' },
+                        { my: 'လဲ', roman: 'le', translation: '疑問詞', audio_my: 'လဲ' }
+                    ]
+                },
+                {
+                    burmese: 'ဘယ်လိုသွားရမလဲ',
+                    roman: 'be-lo-thwa-ya-ma-le',
+                    translation: '要怎麼去？ (How to get there?)',
+                    words: [
+                        { my: 'ဘယ်လို', roman: 'be-lo', translation: '如何', audio_my: 'ဘယ်လို' },
+                        { my: 'သွား', roman: 'thwa', translation: '去', audio_my: 'သွား' },
+                        { my: 'ရ', roman: 'ya', translation: '動詞後綴，表示必須或可以', audio_my: 'ရ' },
+                        { my: 'မလဲ', roman: 'ma-le', translation: '疑問詞', audio_my: 'မလဲ' }
+                    ]
+                },
+                {
+                    burmese: 'ဒီမှာရပ်ပါ',
+                    roman: 'di-hmaa-yat-ba',
+                    translation: '請在這裡停',
+                    words: [
+                        { my: 'ဒီမှာ', roman: 'di-hmaa', translation: '這裡', audio_my: 'ဒီမှာ' },
+                        { my: 'ရပ်', roman: 'yat', translation: '停', audio_my: 'ရပ်' },
+                        { my: 'ပါ', roman: 'ba', translation: '禮貌用詞', audio_my: 'ပါ' }
+                    ]
+                },
+                {
+                    burmese: 'ဘယ်ဘက်ကွေ့ပါ',
+                    roman: 'be-bet-kwe-ba',
+                    translation: '請左轉',
+                    words: [
+                        { my: 'ဘယ်ဘက်', roman: 'be-bet', translation: '左邊', audio_my: 'ဘယ်ဘက်' },
+                        { my: 'ကွေ့', roman: 'kwe', translation: '轉彎', audio_my: 'ကွေ့' },
+                        { my: 'ပါ', roman: 'ba', translation: '禮貌用詞', audio_my: 'ပါ' }
+                    ]
+                },
+                {
+                    burmese: 'ညာဘက်ကွေ့ပါ',
+                    roman: 'nya-bet-kwe-ba',
+                    translation: '請右轉',
+                    words: [
+                        { my: 'ညာဘက်', roman: 'nya-bet', translation: '右邊', audio_my: 'ညာဘက်' },
+                        { my: 'ကွေ့', roman: 'kwe', translation: '轉彎', audio_my: 'ကွေ့' },
+                        { my: 'ပါ', roman: 'ba', translation: '禮貌用詞', audio_my: 'ပါ' }
+                    ]
+                }
+            ],
+            '其他常用語 (Other Common Phrases)': [
+                {
+                    burmese: 'ဒီကိစ္စကို ဘယ်လိုဖြေရှင်းမလဲ',
+                    roman: 'di keik-sa go be lo hpyi-shin ma le',
+                    translation: '這件事要怎麼解決？ (How to solve this problem?)',
+                    words: [
+                        { my: 'ဒီ', roman: 'di', translation: '這個', audio_my: 'ဒီ' },
+                        { my: 'ကိစ္စ', roman: 'keik-sa', translation: '事情', audio_my: 'ကိစ္စ' },
+                        { my: 'ကို', roman: 'go', translation: '受格助詞', audio_my: 'ကို' },
+                        { my: 'ဘယ်လို', roman: 'be lo', translation: '如何', audio_my: 'ဘယ်လို' },
+                        { my: 'ဖြေရှင်း', roman: 'hpyi-shin', translation: '解決', audio_my: 'ဖြေရှင်း' },
+                        { my: 'မလဲ', roman: 'ma le', translation: '疑問詞', audio_my: 'မလဲ' }
+                    ]
+                },
+                 {
+                    burmese: 'ကောင်းပါတယ်',
+                    roman: 'kaung-ba-de',
+                    translation: '很好 (Very good)',
+                    words: [
+                        { my: 'ကောင်း', roman: 'kaung', translation: '好', audio_my: 'ကောင်း' },
+                        { my: 'ပါတယ်', roman: 'ba-de', translation: '禮貌用詞', audio_my: 'ပါတယ်' }
+                    ]
+                },
+                {
+                    burmese: 'ကျွန်တော်/ကျွန်မ ဗမာစကား မပြောတတ်ဘူး',
+                    roman: 'kyun-naw/kyun-ma ba-ma-za-gaa ma-pyau-tat-bu',
+                    translation: '我不會說緬甸語',
+                    words: [
+                        { my: 'ကျွန်တော်', roman: 'kyun-naw', translation: '我 (男性)', audio_my: 'ကျွန်တော်' },
+                        { my: 'ကျွန်မ', roman: 'kyun-ma', translation: '我 (女性)', audio_my: 'ကျွန်မ' },
+                        { my: 'ဗမာစကား', roman: 'ba-ma-za-gaa', translation: '緬甸語', audio_my: 'ဗမာစကား' },
+                        { my: 'မပြောတတ်', roman: 'ma-pyau-tat', translation: '不會說', audio_my: 'မပြောတတ်' },
+                        { my: 'ဘူး', roman: 'bu', translation: '否定詞', audio_my: 'ဘူး' }
+                    ]
+                }
+            ]
+        };
+
+        // --- DOM 元素選擇 ---
+        const alphabetGrid = document.getElementById('alphabet-grid');
+        const displayChar = document.getElementById('display-char');
+        const displayRoman = document.getElementById('display-roman');
+        const audioPlayer = document.getElementById('audio-player');
+        const navAlphabetBtn = document.getElementById('nav-alphabet');
+        const navSentencesBtn = document.getElementById('nav-sentences');
+        const alphabetPage = document.getElementById('alphabet-page');
+        const sentencesPage = document.getElementById('sentences-page');
+        const sentenceContainer = document.getElementById('sentence-container');
+
+        // --- 功能函式 ---
+
+        /** 播放指定文字的發音 (使用 Google Translate TTS) */
+        function speak(textToSpeak) {
+            if (!textToSpeak) return;
+            const audioUrl = `https://translate.google.com/translate_tts?ie=UTF-8&q=${encodeURIComponent(textToSpeak)}&tl=my&client=tw-ob`;
+            audioPlayer.src = audioUrl;
+            audioPlayer.play().catch(error => {
+                console.error("音檔播放失敗:", error);
+            });
+        }
+
+        /** 更新顯示區域的內容 */
+        function updateDisplay(burmese, roman) {
+            displayChar.textContent = burmese;
+            displayRoman.textContent = roman;
+            displayChar.classList.add('animate-pulse');
+            setTimeout(() => displayChar.classList.remove('animate-pulse'), 500);
+        }
+        
+        // --- 字母學習板功能 ---
+        function handleLetterClick(event) {
+            const button = event.target.closest('.letter-button');
+            if (!button) return;
+            const burmeseChar = button.dataset.burmese;
+            const letter = consonants.find(c => c.burmese === burmeseChar);
+            if (letter) {
+                updateDisplay(letter.burmese, letter.roman);
+                speak(letter.burmese);
+            }
+        }
+
+        function createAlphabetButtons() {
+            consonants.forEach(letter => {
+                const button = document.createElement('button');
+                button.className = 'letter-button font-myanmar text-3xl md:text-4xl p-4 bg-white dark:bg-slate-800 rounded-lg shadow-md hover:shadow-xl hover:bg-teal-50 dark:hover:bg-teal-900/50 transform hover:-translate-y-1 transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-teal-500';
+                button.textContent = letter.burmese;
+                button.dataset.burmese = letter.burmese;
+                alphabetGrid.appendChild(button);
+            });
+            alphabetGrid.addEventListener('click', handleLetterClick);
+        }
+
+        // --- 例句學習頁面功能 ---
+        function handleWordClick(event) {
+            const span = event.target.closest('.word-span');
+            if (!span) return;
+            const myanmarText = span.dataset.myanmar;
+            const romanText = span.dataset.roman;
+            const translationText = span.dataset.translation;
+            const audioText = span.dataset.audio;
+
+            // 更新顯示區域
+            updateDisplay(myanmarText, `${romanText} - ${translationText}`);
+            
+            // 播放發音
+            speak(audioText);
+        }
+
+        function createSentenceCards() {
+            sentenceContainer.innerHTML = ''; // 清空舊內容
+            for (const category in categorizedSentences) {
+                // 創建類別標題
+                const categoryHeader = document.createElement('h2');
+                categoryHeader.className = 'text-2xl font-bold mt-8 mb-4 text-teal-600 dark:text-teal-400';
+                categoryHeader.textContent = category;
+                sentenceContainer.appendChild(categoryHeader);
+
+                // 創建例句卡片
+                categorizedSentences[category].forEach(sentence => {
+                    const card = document.createElement('div');
+                    card.className = 'bg-white dark:bg-slate-800 rounded-xl shadow-lg p-6';
+
+                    // 緬甸語例句
+                    const burmeseSentence = document.createElement('p');
+                    burmeseSentence.className = 'font-myanmar text-3xl font-bold mb-2 cursor-pointer';
+                    sentence.words.forEach(word => {
+                        const wordSpan = document.createElement('span');
+                        wordSpan.className = 'word-span hover:bg-teal-200/50 dark:hover:bg-teal-800/50 rounded-md p-1 transition-colors duration-200';
+                        wordSpan.textContent = word.my + ' '; // 加空格模擬單字間距
+                        wordSpan.dataset.myanmar = word.my;
+                        wordSpan.dataset.roman = word.roman;
+                        wordSpan.dataset.translation = word.translation;
+                        wordSpan.dataset.audio = word.audio_my;
+                        burmeseSentence.appendChild(wordSpan);
+                    });
+                    card.appendChild(burmeseSentence);
+
+                    // 羅馬拼音與翻譯
+                    const romanAndTranslation = document.createElement('p');
+                    romanAndTranslation.className = 'text-lg text-slate-500 dark:text-slate-400';
+                    romanAndTranslation.textContent = `羅馬拼音：${sentence.roman} | 翻譯：${sentence.translation}`;
+                    card.appendChild(romanAndTranslation);
+
+                    sentenceContainer.appendChild(card);
+                });
+            }
+            sentenceContainer.addEventListener('click', handleWordClick);
+        }
+
+        // --- 頁面切換功能 ---
+        function showPage(pageName) {
+            const pages = {
+                'alphabet': alphabetPage,
+                'sentences': sentencesPage
+            };
+            for (const name in pages) {
+                if (name === pageName) {
+                    pages[name].classList.remove('hidden');
+                } else {
+                    pages[name].classList.add('hidden');
+                }
+            }
+            // 更新導航按鈕的樣式
+            navAlphabetBtn.classList.toggle('bg-teal-600', pageName === 'alphabet');
+            navAlphabetBtn.classList.toggle('text-white', pageName === 'alphabet');
+            navAlphabetBtn.classList.toggle('bg-slate-200', pageName === 'sentences');
+            navAlphabetBtn.classList.toggle('text-slate-700', pageName === 'sentences');
+            
+            navSentencesBtn.classList.toggle('bg-teal-600', pageName === 'sentences');
+            navSentencesBtn.classList.toggle('text-white', pageName === 'sentences');
+            navSentencesBtn.classList.toggle('bg-slate-200', pageName === 'alphabet');
+            navSentencesBtn.classList.toggle('text-slate-700', pageName === 'alphabet');
+        }
+
+        // --- 初始化 ---
+        createAlphabetButtons();
+        createSentenceCards(); // 預先生成例句卡片，但頁面初始為隱藏
+        navAlphabetBtn.addEventListener('click', () => showPage('alphabet'));
+        navSentencesBtn.addEventListener('click', () => showPage('sentences'));
+        showPage('alphabet'); // 預設顯示字母學習頁面
+    </script>
+</body>
+</html>

@@ -7,6 +7,7 @@ function App() {
   const audioRef = useRef(null);
   const [selected, setSelected] = useState({ burmese: 'က', roman: 'ka' });
   const [page, setPage] = useState('alphabet');
+  const preloadedAudioRefs = useRef(new Map()); // For caching preloaded audio elements
 
   useEffect(() => {
     const unlockAudio = () => {
@@ -58,6 +59,13 @@ function App() {
       document.removeEventListener('click', unlockAudio);
       document.removeEventListener('touchstart', unlockAudio);
       document.removeEventListener('keydown', unlockAudio);
+      
+      // Clean up preloaded audio elements to prevent memory leaks
+      preloadedAudioRefs.current.forEach(audioElement => {
+        audioElement.pause();
+        audioElement.src = '';
+      });
+      preloadedAudioRefs.current.clear();
     };
   }, []); // Empty dependency array ensures this runs only once on mount.
 
@@ -494,6 +502,16 @@ function App() {
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [categories.length]);
+  
+  // Preload audio when page or selection changes
+  useEffect(() => {
+    // Small delay to ensure UI has updated
+    const timer = setTimeout(() => {
+      preloadRelevantAudio();
+    }, 100);
+    
+    return () => clearTimeout(timer);
+  }, [page, selected, selectedCategory]);
 
   function renderCategoryNav() {
     if (!categories || categories.length === 0) return null;
@@ -635,7 +653,20 @@ function App() {
 
   function handleLetterClick(letter) {
     updateDisplay(letter.burmese, letter.roman);
-    speak(letter.burmese);
+    
+    // Check if we have a preloaded version
+    if (preloadedAudioRefs.current.has(letter.burmese)) {
+      const preloadedAudio = preloadedAudioRefs.current.get(letter.burmese);
+      preloadedAudio.play().catch(e => {
+        console.warn('Preloaded audio play failed, falling back to speak() function:', e);
+        speak(letter.burmese);
+      });
+      // Remove from cache after playing to allow fresh preload next time
+      preloadedAudioRefs.current.delete(letter.burmese);
+    } else {
+      // Fallback to regular speak function
+      speak(letter.burmese);
+    }
   }
 
   // eslint-disable-next-line no-unused-vars
@@ -643,8 +674,65 @@ function App() {
     speak(word);
   }
 
+  // Preload audio for a given text
+  function preloadAudio(textToSpeak) {
+    // Don't preload if already cached
+    if (preloadedAudioRefs.current.has(textToSpeak)) {
+      return;
+    }
+    
+    // Create a new audio element for preloading
+    const isLocal = window && window.location && (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1');
+    const ttsPort = process.env.TTS_PORT || 3001;
+    const baseUrl = isLocal ? `http://localhost:${ttsPort}` : '';
+    const url = `${baseUrl}/tts?q=${encodeURIComponent(textToSpeak)}`;
+    
+    const audioElement = new Audio(url);
+    audioElement.preload = 'auto'; // Hint to browser to preload
+    
+    // Store reference for later use
+    preloadedAudioRefs.current.set(textToSpeak, audioElement);
+    
+    console.log('Preloading audio for:', textToSpeak);
+  }
+  
+  // Preload audio for current and adjacent items
+  function preloadRelevantAudio() {
+    if (page === 'alphabet') {
+      // For alphabet page, preload current and nearby letters
+      const currentIndex = consonants.findIndex(c => c.burmese === selected.burmese);
+      const start = Math.max(0, currentIndex - 2);
+      const end = Math.min(consonants.length - 1, currentIndex + 2);
+      
+      for (let i = start; i <= end; i++) {
+        preloadAudio(consonants[i].burmese);
+      }
+    } else if (page === 'sentences') {
+      // For sentences page, preload sentences in the same category
+      // This is a simplified implementation - in a real app, you might want to preload
+      // sentences based on the current scroll position or selected category
+      Object.values(categorizedSentences).forEach(category => {
+        category.slice(0, 3).forEach(sentence => {
+          preloadAudio(sentence.burmese);
+        });
+      });
+    }
+  }
+  
   function playFullSentence(sentence) {
-    speak(sentence.burmese);
+    // Check if we have a preloaded version
+    if (preloadedAudioRefs.current.has(sentence.burmese)) {
+      const preloadedAudio = preloadedAudioRefs.current.get(sentence.burmese);
+      preloadedAudio.play().catch(e => {
+        console.warn('Preloaded audio play failed, falling back to speak() function:', e);
+        speak(sentence.burmese);
+      });
+      // Remove from cache after playing to allow fresh preload next time
+      preloadedAudioRefs.current.delete(sentence.burmese);
+    } else {
+      // Fallback to regular speak function
+      speak(sentence.burmese);
+    }
   }
 
   function renderAlphabetButtons() {
@@ -657,6 +745,15 @@ function App() {
         <div className="font-myanmar">{c.burmese}</div>
       </button>
     ));
+  }
+  
+  // Add a cleanup function for preloaded audio
+  function cleanupPreloadedAudio() {
+    preloadedAudioRefs.current.forEach(audioElement => {
+      audioElement.pause();
+      audioElement.src = '';
+    });
+    preloadedAudioRefs.current.clear();
   }
 
   function renderSentenceCards() {

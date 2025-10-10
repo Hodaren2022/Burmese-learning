@@ -300,7 +300,7 @@ function App() {
     ],
     '情感表達 (Emotions & Feelings)': [
       { burmese: 'ငါကြိုက်တယ်', roman: 'nga kyite de', translation: '我喜歡 (I like)', words: [{ my: 'ငါ', roman: 'nga', translation: '我', audio_my: 'ငါ' }, { my: 'ကြိုက်', roman: 'kyite', translation: '喜歡', audio_my: 'ကြိုက်' }, { my: 'တယ်', roman: 'de', translation: '助詞', audio_my: 'တယ်' }] },
-      { burmese: 'ငါမကြိုက်ဘူး', roman: 'nga ma kyite bu', translation: "我不喜歡 (I\'m not)'", words: [{ my: 'ငါ', roman: 'nga', translation: '我', audio_my: 'ငါ' }, { my: 'မ', roman: 'ma', translation: '否定', audio_my: 'မ' }, { my: 'ကြိုက်', roman: 'kyite', translation: '喜歡', audio_my: 'ကြိုက်' }, { my: 'ဘူး', roman: 'bu', translation: '否定語氣詞', audio_my: 'ဘူး' }] },
+      { burmese: 'ငါမကြိုက်ဘူး', roman: 'nga ma kyite bu', translation: "我不喜歡 (I'm not)'", words: [{ my: 'ငါ', roman: 'nga', translation: '我', audio_my: 'ငါ' }, { my: 'မ', roman: 'ma', translation: '否定', audio_my: 'မ' }, { my: 'ကြိုက်', roman: 'kyite', translation: '喜歡', audio_my: 'ကြိုက်' }, { my: 'ဘူး', roman: 'bu', translation: '否定語氣詞', audio_my: 'ဘူး' }] },
       { burmese: 'ငါမင်းကိုချစ်တယ်', roman: 'nga min ko chite de', translation: '我愛你 (I love you)', words: [{ my: 'ငါ', roman: 'nga', translation: '我', audio_my: 'ငါ' }, { my: 'မင်း', roman: 'min', translation: '你', audio_my: 'မင်း' }, { my: 'ကို', roman: 'ko', translation: '受格助詞', audio_my: 'ကို' }, { my: 'ချစ်', roman: 'chite', translation: '愛', audio_my: 'ချစ်' }, { my: 'တယ်', roman: 'de', translation: '助詞', audio_my: 'တယ်' }] },
       { burmese: 'ငါမင်းကိုလွမ်းတယ်', roman: 'nga min ko lon de', translation: '我想念你 (I miss you)', words: [{ my: 'ငါ', roman: 'nga', translation: '我', audio_my: 'ငါ' }, { my: 'မင်း', roman: 'min', translation: '你', audio_my: 'မင်း' }, { my: 'ကို', roman: 'ko', translation: '受格助詞', audio_my: 'ကို' }, { my: 'လွမ်း', roman: 'lon', translation: '想念', audio_my: 'လွမ်း' }, { my: 'တယ်', roman: 'de', translation: '助詞', audio_my: 'တယ်' }] },
       { burmese: 'ငါနေကောင်းတယ်', roman: 'nga nei kaung de', translation: "我很好 (I'm fine)", words: [{ my: 'ငါ', roman: 'nga', translation: '我', audio_my: 'ငါ' }, { my: 'နေ', roman: 'nei', translation: '狀態', audio_my: 'နေ' }, { my: 'ကောင်း', roman: 'kaung', translation: '好', audio_my: 'ကောင်း' }, { my: 'တယ်', roman: 'de', translation: '助詞', audio_my: 'တယ်' }] },
@@ -346,7 +346,7 @@ function App() {
       { burmese: 'ဘယ်လို?', roman: 'be lo?', translation: '誰？ (Who?)', words: [{ my: 'ဘယ်လို', roman: 'be lo', translation: '怎樣', audio_my: 'ဘယ်လို' }] },
       { burmese: 'ဘယ်လို?', roman: 'be lo?', translation: '哪裡？ (Where?)', words: [{ my: 'ဘယ်လို', roman: 'be lo', translation: '怎樣', audio_my: 'ဘယ်လို' }] },
       { burmese: 'ဘယ်လိုခွဲခြားလဲ?', roman: 'be lo hkwai khe la?', translation: '什麼時候？ (When?)', words: [{ my: 'ဘယ်လို', roman: 'be lo', translation: '怎樣', audio_my: 'ဘယ်လို' }, { my: 'ခွဲ', roman: 'hkwai', translation: '分開', audio_my: 'ခွဲ' }, { my: 'ခြား', roman: 'khe', translation: '區別', audio_my: 'ခြား' }, { my: 'လဲ', roman: 'la', translation: '疑問詞', audio_my: 'လဲ' }] },
-      { burmese: 'ငါမသိတယ်', roman: 'nga ma sit de', translation: "我不知道 (I\'m not sure)", words: [{ my: 'ငါ', roman: 'nga', translation: '我', audio_my: 'ငါ' }, { my: 'မ', roman: 'ma', translation: '否定', audio_my: 'မ' }, { my: 'သိ', roman: 'sit', translation: '知道', audio_my: 'သိ' }, { my: 'တယ်', roman: 'de', translation: '助詞', audio_my: 'တယ်' }] },
+      { burmese: 'ငါမသိတယ်', roman: 'nga ma sit de', translation: "我不知道 (I'm not sure)", words: [{ my: 'ငါ', roman: 'nga', translation: '我', audio_my: 'ငါ' }, { my: 'မ', roman: 'ma', translation: '否定', audio_my: 'မ' }, { my: 'သိ', roman: 'sit', translation: '知道', audio_my: 'သိ' }, { my: 'တယ်', roman: 'de', translation: '助詞', audio_my: 'တယ်' }] },
       { burmese: 'ဒါဘယ်လိုလဲ?', roman: 'da be lo le?', translation: '這是什麼？ (What is this?)', words: [{ my: 'ဒါ', roman: 'da', translation: '這', audio_my: 'ဒါ' }, { my: 'ဘယ်လို', roman: 'be lo', translation: '怎樣', audio_my: 'ဘယ်လို' }, { my: 'လဲ', roman: 'le', translation: '疑問詞', audio_my: 'လဲ' }] },
       { burmese: 'ဟိုဘယ်လိုလဲ?', roman: 'ho be lo le?', translation: '那是什麼？ (What is that?)', words: [{ my: 'ဟို', roman: 'ho', translation: '那', audio_my: 'ဟို' }, { my: 'ဘယ်လို', roman: 'be lo', translation: '怎樣', audio_my: 'ဘယ်လို' }, { my: 'လဲ', roman: 'le', translation: '疑問詞', audio_my: 'လဲ' }] },
       { burmese: 'ဘယ်လောက်?', roman: 'be laut?', translation: '多少？ (How much?)', words: [{ my: 'ဘယ်လောက်', roman: 'be laut', translation: '多少', audio_my: 'ဘယ်လောက်' }] },
@@ -552,25 +552,14 @@ function App() {
     // 如果在本機開發環境，指向我們的 proxy endpoint，避免瀏覽器直接向 Google TTS 發生格式或 CORS 問題
     const isLocal = window && window.location && (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1');
     
-    // Default TTS port - this value is used when config.json is not available
+    // Default TTS port - using environment variable or default value
     // To customize the TTS port, set the TTS_PORT environment variable
     let ttsPort = process.env.TTS_PORT || 3001;
     
-    // In local development, we previously tried to load from config.json
-    // but now we use environment variables for better security and flexibility
+    // In local development, we use environment variables for better security and flexibility
+    // We no longer attempt to load config.json to avoid build issues
     if (isLocal) {
-      try {
-        // Check if config.json exists for backward compatibility
-        // This will fail gracefully in production builds where the file doesn't exist.
-        const config = require('./config.json');
-        if (config && config.TTS_PORT) {
-          ttsPort = config.TTS_PORT;
-          console.warn('Using deprecated config.json for TTS port. Please use TTS_PORT environment variable instead.');
-        }
-      } catch (error) {
-        // config.json doesn't exist, which is fine - we'll use the default or environment variable
-        console.debug('config.json not found, using TTS_PORT from environment or default value');
-      }
+      console.debug(`Using TTS port ${ttsPort} for local development`);
     }
 
     const url = isLocal

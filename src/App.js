@@ -552,17 +552,24 @@ function App() {
     // 如果在本機開發環境，指向我們的 proxy endpoint，避免瀏覽器直接向 Google TTS 發生格式或 CORS 問題
     const isLocal = window && window.location && (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1');
     
-    let ttsPort = 3001; // Default port
+    // Default TTS port - this value is used when config.json is not available
+    // To customize the TTS port, set the TTS_PORT environment variable
+    let ttsPort = process.env.TTS_PORT || 3001;
+    
+    // In local development, we previously tried to load from config.json
+    // but now we use environment variables for better security and flexibility
     if (isLocal) {
       try {
-        // Dynamically require config.json only in local environment.
+        // Check if config.json exists for backward compatibility
         // This will fail gracefully in production builds where the file doesn't exist.
         const config = require('./config.json');
         if (config && config.TTS_PORT) {
           ttsPort = config.TTS_PORT;
+          console.warn('Using deprecated config.json for TTS port. Please use TTS_PORT environment variable instead.');
         }
       } catch (error) {
-        console.warn('Could not load config.json, using default TTS port 3001.');
+        // config.json doesn't exist, which is fine - we'll use the default or environment variable
+        console.debug('config.json not found, using TTS_PORT from environment or default value');
       }
     }
 
@@ -621,6 +628,7 @@ function App() {
     speak(letter.burmese);
   }
 
+  // eslint-disable-next-line no-unused-vars
   function handleWordClick(word) {
     speak(word);
   }

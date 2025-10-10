@@ -61,11 +61,12 @@ function App() {
       document.removeEventListener('keydown', unlockAudio);
       
       // Clean up preloaded audio elements to prevent memory leaks
-      preloadedAudioRefs.current.forEach(audioElement => {
+      const audioRefs = preloadedAudioRefs.current;
+      audioRefs.forEach(audioElement => {
         audioElement.pause();
         audioElement.src = '';
       });
-      preloadedAudioRefs.current.clear();
+      audioRefs.clear();
     };
   }, []); // Empty dependency array ensures this runs only once on mount.
 
@@ -511,7 +512,7 @@ function App() {
     }, 100);
     
     return () => clearTimeout(timer);
-  }, [page, selected, selectedCategory]);
+  }, [page, selected, selectedCategory, preloadRelevantAudio]);
 
   function renderCategoryNav() {
     if (!categories || categories.length === 0) return null;
@@ -747,14 +748,7 @@ function App() {
     ));
   }
   
-  // Add a cleanup function for preloaded audio
-  function cleanupPreloadedAudio() {
-    preloadedAudioRefs.current.forEach(audioElement => {
-      audioElement.pause();
-      audioElement.src = '';
-    });
-    preloadedAudioRefs.current.clear();
-  }
+
 
   function renderSentenceCards() {
     const catsToRender = selectedCategory && selectedCategory !== 'all' ? [selectedCategory] : Object.keys(mergedSentences);

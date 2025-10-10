@@ -1,7 +1,7 @@
 import React, { useRef, useState, useEffect } from 'react';
 import './App.css';
 import vocab from './data/vocab.json';
-import config from './config.json';
+
 
 function App() {
   const audioRef = useRef(null);
@@ -551,8 +551,23 @@ function App() {
     // 回退：使用 Google TTS via new Audio
     // 如果在本機開發環境，指向我們的 proxy endpoint，避免瀏覽器直接向 Google TTS 發生格式或 CORS 問題
     const isLocal = window && window.location && (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1');
+    
+    let ttsPort = 3001; // Default port
+    if (isLocal) {
+      try {
+        // Dynamically require config.json only in local environment.
+        // This will fail gracefully in production builds where the file doesn't exist.
+        const config = require('./config.json');
+        if (config && config.TTS_PORT) {
+          ttsPort = config.TTS_PORT;
+        }
+      } catch (error) {
+        console.warn('Could not load config.json, using default TTS port 3001.');
+      }
+    }
+
     const url = isLocal
-      ? `http://localhost:${config.TTS_PORT}/tts?q=${encodeURIComponent(textToSpeak)}`
+      ? `http://localhost:${ttsPort}/tts?q=${encodeURIComponent(textToSpeak)}`
       : `https://translate.google.com/translate_tts?ie=UTF-8&q=${encodeURIComponent(textToSpeak)}&tl=my&client=tw-ob`;
 
     try {

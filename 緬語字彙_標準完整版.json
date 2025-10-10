@@ -1,0 +1,574 @@
+{
+  "version": "1.0",
+  "language": "Chinese–Burmese",
+  "sections": [
+    {
+      "section_name": "基礎動詞與日常詞彙",
+      "words": [
+        {
+          "chinese": "去 (Go)",
+          "burmese": "သြားေဒ",
+          "pronunciation": "thwa:-de",
+          "source": "原始資料",
+          "notes": "動詞「去」（現在/過去式）"
+        },
+        {
+          "chinese": "來 (Come)",
+          "burmese": "လာေဒ",
+          "pronunciation": "la-de",
+          "source": "原始資料",
+          "notes": "動詞「來」（現在/過去式）"
+        },
+        {
+          "chinese": "吃 (Eat)",
+          "burmese": "စားေဒ",
+          "pronunciation": "sa:-de",
+          "source": "原始資料",
+          "notes": "動詞「吃」（現在/過去式）"
+        },
+        {
+          "chinese": "公車",
+          "burmese": "ဘတ္(စ)ကား",
+          "pronunciation": "ba’-sa’-ka:",
+          "source": "原始資料",
+          "notes": "交通工具詞彙"
+        },
+        {
+          "chinese": "計程車",
+          "burmese": "တက္(က) စီ",
+          "pronunciation": "taxi",
+          "source": "原始資料",
+          "notes": "交通工具詞彙"
+        },
+        {
+          "chinese": "想要 (Want)",
+          "burmese": "လိုခ်င္ေဒ",
+          "pronunciation": "lo-jin-de",
+          "source": "原始資料",
+          "notes": "動詞「想要」"
+        },
+        {
+          "chinese": "不想要 (I don't want)",
+          "burmese": "ငါမလိုပါ",
+          "pronunciation": "nga ma lo ba",
+          "source": "原始資料",
+          "notes": "非正式說法"
+        },
+        {
+          "chinese": "太貴了",
+          "burmese": "ေစ်းႀကီးတယ္",
+          "pronunciation": "zei kyi de",
+          "source": "原始資料",
+          "notes": "形容詞動詞「是昂貴的」"
+        },
+        {
+          "chinese": "便宜",
+          "burmese": "ေစ်းခ်ိဳေဒ",
+          "pronunciation": "zei:-cho-de",
+          "source": "原始資料",
+          "notes": "形容詞動詞「是便宜的」"
+        },
+        {
+          "chinese": "請便宜點",
+          "burmese": "ေစ်းေလွ်ာ့ပါ",
+          "pronunciation": "zei shoh ba",
+          "source": "原始資料",
+          "notes": "命令式（講價用語）"
+        },
+        {
+          "chinese": "喜歡 (I like)",
+          "burmese": "ငါႀကိဳက္တယ္",
+          "pronunciation": "nga kyite de",
+          "source": "原始資料",
+          "notes": "對事物或活動的非正式喜好表達"
+        },
+        {
+          "chinese": "不喜歡 (I don't like)",
+          "burmese": "ငါမႀကိဳက္ဘူး",
+          "pronunciation": "nga ma kyite bu",
+          "source": "原始資料",
+          "notes": "對事物或活動的非正式不喜歡表達"
+        },
+        {
+          "chinese": "妳很可愛",
+          "burmese": "မင္းကခ်စ္စရာေလး",
+          "pronunciation": "min ka chit sa ya: lei:",
+          "source": "修正¹",
+          "notes": "較常見、溫和的表達好感或稱讚的說法，取代「我愛你/我喜歡你」的強烈語氣。"
+        },
+        {
+          "chinese": "白天",
+          "burmese": "ေန႕",
+          "pronunciation": "nei’",
+          "source": "原始資料",
+          "notes": "指「日/天」"
+        },
+        {
+          "chinese": "晚上 (夜晚)",
+          "burmese": "ည",
+          "pronunciation": "nya",
+          "source": "原始資料",
+          "notes": "指「夜/晚上」"
+        },
+        {
+          "chinese": "早餐",
+          "burmese": "နံနက္စာ",
+          "pronunciation": "naN neiʔ sa",
+          "source": "原始資料",
+          "notes": "字面為「早上吃的食物」"
+        },
+        {
+          "chinese": "午餐",
+          "burmese": "ေန႕လည္စာ",
+          "pronunciation": "nei' lé sa",
+          "source": "原始資料",
+          "notes": "字面為「下午吃的食物」"
+        },
+        {
+          "chinese": "晚餐",
+          "burmese": "ညစာ",
+          "pronunciation": "nya sa",
+          "source": "原始資料",
+          "notes": "字面為「晚上吃的食物」"
+        },
+        {
+          "chinese": "宵夜",
+          "burmese": "ညေစာင္းစာ",
+          "pronunciation": "nya:-zauñ: sa",
+          "source": "補充²",
+          "notes": "字面為「深夜的食物」。"
+        },
+        {
+          "chinese": "酒 (酒精)",
+          "burmese": "အရက္",
+          "pronunciation": "a-ye’",
+          "source": "原始資料",
+          "notes": "亦可指「酒吧」"
+        },
+        {
+          "chinese": "那邊",
+          "burmese": "ဟိုမွာ",
+          "pronunciation": "ho-hma",
+          "source": "原始資料",
+          "notes": "「那裡」"
+        },
+        {
+          "chinese": "這邊",
+          "burmese": "ဒီမွာ",
+          "pronunciation": "di-hma",
+          "source": "原始資料",
+          "notes": "「這裡」"
+        },
+        {
+          "chinese": "遠的地方",
+          "burmese": "ေဝးေဒ",
+          "pronunciation": "wei:-de",
+          "source": "原始資料",
+          "notes": "形容詞動詞「是遠的」"
+        },
+        {
+          "chinese": "近的地方",
+          "burmese": "နီးေဒ",
+          "pronunciation": "ni:-de",
+          "source": "原始資料",
+          "notes": "形容詞動詞「是近的」"
+        },
+        {
+          "chinese": "開心",
+          "burmese": "ေပ်ာ္တယ္",
+          "pronunciation": "pyau tai",
+          "source": "原始資料",
+          "notes": "形容詞動詞「是快樂的」"
+        },
+        {
+          "chinese": "難過",
+          "burmese": "ဝမ္းနည္းတယ္",
+          "pronunciation": "wouN né tai",
+          "source": "原始資料",
+          "notes": "形容詞動詞「是難過的」"
+        },
+        {
+          "chinese": "舒服",
+          "burmese": "ေနေကာင္းေဒ",
+          "pronunciation": "nei-kaun:-de",
+          "source": "原始資料",
+          "notes": "形容詞動詞「是安好的/感覺良好」"
+        },
+        {
+          "chinese": "不舒服",
+          "burmese": "ေနမေကာင္းဘူး",
+          "pronunciation": "nei-mo-kaun:-bu:",
+          "source": "原始資料",
+          "notes": "形容詞動詞「感覺不好」"
+        },
+        {
+          "chinese": "痛",
+          "burmese": "နာေဒ / ကိုက္ေဒ",
+          "pronunciation": "na-de / kai’-te",
+          "source": "原始資料",
+          "notes": "動詞「疼痛」（na-de）或「痛/痠痛」（kai’-te）"
+        },
+        {
+          "chinese": "騙子 (Liar/Swindler)",
+          "burmese": "လိမ်လည်သူ",
+          "pronunciation": "lein-lè: thu",
+          "source": "補充³",
+          "notes": "字面為「欺騙的人」或「說謊者」。"
+        },
+        {
+          "chinese": "好人 (Good person)",
+          "burmese": "လူေကာင္း",
+          "pronunciation": "lu: kaun:",
+          "source": "補充³",
+          "notes": "「人」 + 「好」"
+        },
+        {
+          "chinese": "壞人 (Bad person)",
+          "burmese": "လူဆိုး",
+          "pronunciation": "lu: hso:",
+          "source": "補充³",
+          "notes": "「人」 + 「壞」（使用 lu: hso: 更自然和標準）"
+        }
+      ]
+    },
+    {
+      "section_name": "交通詞彙",
+      "words": [
+        {
+          "chinese": "公車",
+          "burmese": "ဘတ္(စ)ကား",
+          "pronunciation": "ba’-sa’-ka:",
+          "source": "確認",
+          "notes": "交通工具詞彙"
+        },
+        {
+          "chinese": "計程車",
+          "burmese": "တက္(က) စီ",
+          "pronunciation": "taxi",
+          "source": "確認",
+          "notes": "交通工具詞彙"
+        },
+        {
+          "chinese": "請帶我去機場",
+          "burmese": "ေလဆိပ္ကိုပို႕ေပးပါ",
+          "pronunciation": "lei: sei' ko: pō: pei: ba",
+          "source": "修正",
+          "notes": "最實用且直接的請求（請送我去...）。"
+        },
+        {
+          "chinese": "從這裡遠嗎？",
+          "burmese": "ဒီကေန ေတာ္ေတာ္ေဝးလား",
+          "pronunciation": "di: ga nei: dau' wai: the lei:",
+          "source": "修正",
+          "notes": "更自然的詢問方式。"
+        },
+        {
+          "chinese": "請給我收據",
+          "burmese": "ကားျဖတ္ပိုင္းေလးေပးပါ",
+          "pronunciation": "kā: p'ya'k' paiN lei: pei: ba",
+          "source": "修正",
+          "notes": "更直接且實用的請求「收據/發票」。"
+        },
+        {
+          "chinese": "我想去火車站",
+          "burmese": "ဘူတာရုံကိုသြားမယ္",
+          "pronunciation": "bū ta: youN ko: thwa: mei",
+          "source": "修正",
+          "notes": "更準確的發音。"
+        },
+        {
+          "chinese": "我會坐公車去",
+          "burmese": "ဘတ္(စ)ကားနဲ႕သြားမယ္",
+          "pronunciation": "ba' sa' ka: nae thwa: mei",
+          "source": "修正",
+          "notes": "加上 nae (နဲ႕) 表示「搭乘/以...方式」去。"
+        }
+      ]
+    },
+    {
+      "section_name": "旅遊實用詞彙",
+      "words": [
+        {
+          "chinese": "您好",
+          "burmese": "မဂၤလာပါ",
+          "pronunciation": "min ga la ba",
+          "source": "修正",
+          "notes": "最常用且中性的打招呼方式。"
+        },
+        {
+          "chinese": "再見",
+          "burmese": "သြားေတာ့မယ္",
+          "pronunciation": "thwa: dau mai",
+          "source": "確認",
+          "notes": "離去者對留下者說：「我要走了」。"
+        },
+        {
+          "chinese": "對不起",
+          "burmese": "ေတာင္းပန္ပါတယ္",
+          "pronunciation": "tauN pan ba de",
+          "source": "修正",
+          "notes": "最常見且適當的「抱歉/對不起」。"
+        },
+        {
+          "chinese": "多少錢？",
+          "burmese": "ဒါ ဘယ္ေလာက္လဲ",
+          "pronunciation": "da ba yi' lau'k lai:",
+          "source": "修正",
+          "notes": "口語化問法 (省略禮貌詞 pa)"
+        },
+        {
+          "chinese": "你好嗎？",
+          "burmese": "ေနေကာင္းလား",
+          "pronunciation": "nei kaun: la:",
+          "source": "修正",
+          "notes": "更準確的發音。"
+        },
+        {
+          "chinese": "哪裡有好吃的餐廳？",
+          "burmese": "စားေသာက္ဆိုင္ေကာင္းေကာင္း ဘယ္မွာရွိပါသလဲ",
+          "pronunciation": "sa: thau' saiN kaun: kaun: bei mha shi: Ba la:",
+          "source": "修正",
+          "notes": "使用 kaun: kaun: (好的/很棒的)。"
+        },
+        {
+          "chinese": "請慢一點說",
+          "burmese": "ေျဖးေျဖးေလးေျပာျပပါ",
+          "pronunciation": "pyei: pyei: lei: pyau pa",
+          "source": "修正",
+          "notes": "加上 lei: (一點點) 讓語氣更柔和。"
+        },
+        {
+          "chinese": "請重複一遍",
+          "burmese": "ထပ္ေျပာျပပါဦး",
+          "pronunciation": "hta' pyau ba aun:",
+          "source": "修正",
+          "notes": "更準確的發音與表達。"
+        }
+      ]
+    },
+    {
+      "section_name": "數字與顏色",
+      "words": [
+        {
+          "chinese": "數字 (Number)",
+          "burmese": "緬甸語符號 (Burmese Script)",
+          "pronunciation": "原始轉寫 (Transliteration)",
+          "source": "建議修正轉寫 (Pronunciation)",
+          "notes": "修正備註 (Notes)"
+        },
+        {
+          "chinese": "0",
+          "burmese": "၀",
+          "pronunciation": "thon-nya",
+          "source": "thoun: nya:",
+          "notes": "修正: 聲調更精準，thoun: (三聲調) 加上 nya: (二聲調)。這是「零」的標準發音。"
+        },
+        {
+          "chinese": "1",
+          "burmese": "၁",
+          "pronunciation": "ti’",
+          "source": "ti’",
+          "notes": "確認: 非常準確。"
+        },
+        {
+          "chinese": "2",
+          "burmese": "၂",
+          "pronunciation": "hni’",
+          "source": "hni’",
+          "notes": "確認: 非常準確。"
+        },
+        {
+          "chinese": "3",
+          "burmese": "၃",
+          "pronunciation": "thon:",
+          "source": "thoun:",
+          "notes": "修正: 聲調更精準。"
+        },
+        {
+          "chinese": "4",
+          "burmese": "၄",
+          "pronunciation": "lei:",
+          "source": "lei:",
+          "notes": "確認: 非常準確。"
+        },
+        {
+          "chinese": "5",
+          "burmese": "၅",
+          "pronunciation": "nga:",
+          "source": "nga:",
+          "notes": "確認: 非常準確。"
+        },
+        {
+          "chinese": "6",
+          "burmese": "၆",
+          "pronunciation": "chau’",
+          "source": "chauk'",
+          "notes": "修正: 韻尾發音更精準，是帶有 k 聲的入聲。"
+        },
+        {
+          "chinese": "7",
+          "burmese": "၇",
+          "pronunciation": "hkun-hni’",
+          "source": "khuN-hni’",
+          "notes": "修正: 應為 khuN (七) 加上 hni’ (二)，聲母和鼻音更精準。"
+        },
+        {
+          "chinese": "8",
+          "burmese": "၈",
+          "pronunciation": "shi’",
+          "source": "shi’",
+          "notes": "確認: 非常準確。"
+        },
+        {
+          "chinese": "9",
+          "burmese": "၉",
+          "pronunciation": "ko:",
+          "source": "ko:",
+          "notes": "確認: 非常準確。"
+        },
+        {
+          "chinese": "10",
+          "burmese": "၁၀",
+          "pronunciation": "te-hse",
+          "source": "ta se:",
+          "notes": "修正: 這是更常見和自然連貫的發音，ta (一) 加上 se: (十)。"
+        },
+        {
+          "chinese": "藍色",
+          "burmese": "အပြာ",
+          "pronunciation": "a-pya",
+          "source": "a-pya",
+          "notes": "確認: 準確。"
+        },
+        {
+          "chinese": "綠色",
+          "burmese": "အစိမ်း",
+          "pronunciation": "a-sein:",
+          "source": "a-seiN:",
+          "notes": "修正: 加上鼻音和準確聲調。"
+        },
+        {
+          "chinese": "黃色",
+          "burmese": "အဝါ",
+          "pronunciation": "a-wa",
+          "source": "a-wā",
+          "notes": "修正: 加上長母音/聲調標記，更精確。"
+        },
+        {
+          "chinese": "紅色",
+          "burmese": "အနီ",
+          "pronunciation": "a-ni",
+          "source": "a-ni",
+          "notes": "確認: 準確。"
+        },
+        {
+          "chinese": "黑色",
+          "burmese": "အနက်",
+          "pronunciation": "a-ne’",
+          "source": "a-ne'",
+          "notes": "修正: 保持 ’ 符號表示入聲，更準確。"
+        },
+        {
+          "chinese": "白色",
+          "burmese": "အဖြူ",
+          "pronunciation": "a-hpyu",
+          "source": "a-hpyū",
+          "notes": "修正: 加上長母音標記，更精確。"
+        }
+      ]
+    },
+    {
+      "section_name": "金額與時間表達",
+      "words": [
+        {
+          "chinese": "元/塊",
+          "burmese": "-",
+          "pronunciation": "က်ပ္",
+          "source": "kya'",
+          "notes": "貨幣單位，放在數字之後。"
+        },
+        {
+          "chinese": "一千",
+          "burmese": "၁၀၀၀",
+          "pronunciation": "တစ္ထောင့်",
+          "source": "ta haun:",
+          "notes": "ta (一) + hsaun: (千)。"
+        },
+        {
+          "chinese": "五千",
+          "burmese": "၅၀၀၀",
+          "pronunciation": "ငါးထောင့်",
+          "source": "nga: haun:",
+          "notes": "nga: (五) + hsaun: (千)。"
+        },
+        {
+          "chinese": "一萬",
+          "burmese": "၁၀၀၀၀",
+          "pronunciation": "တစ္သောင်း",
+          "source": "ta thauN:",
+          "notes": "ta (一) + thauN: (萬)。"
+        },
+        {
+          "chinese": "十萬",
+          "burmese": "၁၀၀၀၀၀",
+          "pronunciation": "တစ္သိန္း",
+          "source": "ta théiN:",
+          "notes": "ta (一) + th"
+        },
+        {
+          "chinese": "總共多少錢？",
+          "burmese": "-",
+          "pronunciation": "စုစုပေါင်းဘယ်လောက်လဲ",
+          "source": "su: su: pauN: bai lau’k lai:",
+          "notes": "常用問價句。"
+        },
+        {
+          "chinese": "100 緬幣",
+          "burmese": "၁၀၀",
+          "pronunciation": "တစ်ရာက်ပ္",
+          "source": "ta ya: kya’",
+          "notes": "ta (一) + ya: (百)。"
+        },
+        {
+          "chinese": "500 緬幣",
+          "burmese": "၅၀၀",
+          "pronunciation": "ငါးရာက်ပ္",
+          "source": "nga: ya: kya’",
+          "notes": "nga: (五) + ya: (百)。"
+        },
+        {
+          "chinese": "2,500 緬幣",
+          "burmese": "၂၅၀၀",
+          "pronunciation": "နှစ်ထောင့်ငါးရာက်ပ္",
+          "source": "hni’ haun: nga: ya: kya’",
+          "notes": "2 千 5 百 元。"
+        },
+        {
+          "chinese": "7,000 緬幣",
+          "burmese": "ရ၀၀၀",
+          "pronunciation": "ခုနစ်ထောင့်က်ပ္",
+          "source": "khuN-hni’ haun: kya’",
+          "notes": "7 千 元。注意 khuN-hni’ 是「七」的變音。"
+        },
+        {
+          "chinese": "12,000 緬幣",
+          "burmese": "၁၂၀၀၀",
+          "pronunciation": "တစ္သောင်းနှစ်ထောင့်က်ပ္",
+          "source": "ta thauN: hni’ haun: kya’",
+          "notes": "1 萬 2 千 元。"
+        },
+        {
+          "chinese": "50,000 緬幣",
+          "burmese": "၅၀၀၀၀",
+          "pronunciation": "ငါးသောင်းက်ပ္",
+          "source": "nga: thauN: kya’",
+          "notes": "5 萬 元。"
+        }
+      ]
+    },
+    {
+      "section_name": "緬語數字進階系統與應用",
+      "words": []
+    }
+  ]
+}

@@ -1,16 +1,7 @@
 import React, { useRef, useState, useEffect } from 'react';
 import './App.css';
 import vocab from './data/vocab.json';
-
-let config = { TTS_PORT: 3001 }; // Default config
-
-if (process.env.NODE_ENV === 'development') {
-  try {
-    config = require('./config.json');
-  } catch (e) {
-    console.warn('Could not load config.json during development, using default port 3001.');
-  }
-}
+import config from './config.json';
 
 function App() {
   const audioRef = useRef(null);
@@ -298,7 +289,7 @@ function App() {
       { burmese: 'သူ', roman: 'thu', translation: '他/她 (He/She)', words: [{ my: 'သူ', roman: 'thu', translation: '他/她', audio_my: 'သူ' }] },
       { burmese: 'ငါတို့', roman: 'nga do', translation: '我們 (We)', words: [{ my: 'ငါ', roman: 'nga', translation: '我', audio_my: 'ငါ' }, { my: 'တို့', roman: 'do', translation: '們', audio_my: 'တို့' }] },
       { burmese: 'သင်တို့', roman: 'thang do', translation: '你們 (You all)', words: [{ my: 'သင်', roman: 'thang', translation: '你', audio_my: 'သင်' }, { my: 'တို့', roman: 'do', translation: '們', audio_my: 'တို့' }] },
-      { burmese: 'သူတို့', roman: 'thu do', translation: 'พวกเขา/她們 (They)', words: [{ my: 'သူ', roman: 'thu', translation: '他/她', audio_my: 'သူ' }, { my: 'တို့', roman: 'do', translation: '們', audio_my: 'တို့' }] }
+      { burmese: 'သူတို့', roman: 'thu do', translation: '他們/她們 (They)', words: [{ my: 'သူ', roman: 'thu', translation: '他/她', audio_my: 'သူ' }, { my: 'တို့', roman: 'do', translation: '們', audio_my: 'တို့' }] }
     ],
     '指示代詞 (Demonstratives)': [
       { burmese: 'ဒါ', roman: 'da', translation: '這個 (This)', words: [{ my: 'ဒါ', roman: 'da', translation: '這個', audio_my: 'ဒါ' }] },
@@ -309,10 +300,10 @@ function App() {
     ],
     '情感表達 (Emotions & Feelings)': [
       { burmese: 'ငါကြိုက်တယ်', roman: 'nga kyite de', translation: '我喜歡 (I like)', words: [{ my: 'ငါ', roman: 'nga', translation: '我', audio_my: 'ငါ' }, { my: 'ကြိုက်', roman: 'kyite', translation: '喜歡', audio_my: 'ကြိုက်' }, { my: 'တယ်', roman: 'de', translation: '助詞', audio_my: 'တယ်' }] },
-      { burmese: 'ငါမကြိုက်ဘူး', roman: 'nga ma kyite bu', translation: '我不喜歡 (I am not)', words: [{ my: 'ငါ', roman: 'nga', translation: '我', audio_my: 'ငါ' }, { my: 'မ', roman: 'ma', translation: '否定', audio_my: 'မ' }, { my: 'ကြိုက်', roman: 'kyite', translation: '喜歡', audio_my: 'ကြိုက်' }, { my: 'ဘူး', roman: 'bu', translation: '否定語氣詞', audio_my: 'ဘူး' }] },
+      { burmese: 'ငါမကြိုက်ဘူး', roman: 'nga ma kyite bu', translation: "我不喜歡 (I\'m not)'", words: [{ my: 'ငါ', roman: 'nga', translation: '我', audio_my: 'ငါ' }, { my: 'မ', roman: 'ma', translation: '否定', audio_my: 'မ' }, { my: 'ကြိုက်', roman: 'kyite', translation: '喜歡', audio_my: 'ကြိုက်' }, { my: 'ဘူး', roman: 'bu', translation: '否定語氣詞', audio_my: 'ဘူး' }] },
       { burmese: 'ငါမင်းကိုချစ်တယ်', roman: 'nga min ko chite de', translation: '我愛你 (I love you)', words: [{ my: 'ငါ', roman: 'nga', translation: '我', audio_my: 'ငါ' }, { my: 'မင်း', roman: 'min', translation: '你', audio_my: 'မင်း' }, { my: 'ကို', roman: 'ko', translation: '受格助詞', audio_my: 'ကို' }, { my: 'ချစ်', roman: 'chite', translation: '愛', audio_my: 'ချစ်' }, { my: 'တယ်', roman: 'de', translation: '助詞', audio_my: 'တယ်' }] },
       { burmese: 'ငါမင်းကိုလွမ်းတယ်', roman: 'nga min ko lon de', translation: '我想念你 (I miss you)', words: [{ my: 'ငါ', roman: 'nga', translation: '我', audio_my: 'ငါ' }, { my: 'မင်း', roman: 'min', translation: '你', audio_my: 'မင်း' }, { my: 'ကို', roman: 'ko', translation: '受格助詞', audio_my: 'ကို' }, { my: 'လွမ်း', roman: 'lon', translation: '想念', audio_my: 'လွမ်း' }, { my: 'တယ်', roman: 'de', translation: '助詞', audio_my: 'တယ်' }] },
-      { burmese: 'ငါနေကောင်းတယ်', roman: 'nga nei kaung de', translation: '我很好 (I am fine)', words: [{ my: 'ငါ', roman: 'nga', translation: '我', audio_my: 'ငါ' }, { my: 'နေ', roman: 'nei', translation: '狀態', audio_my: 'နေ' }, { my: 'ကောင်း', roman: 'kaung', translation: '好', audio_my: 'ကောင်း' }, { my: 'တယ်', roman: 'de', translation: '助詞', audio_my: 'တယ်' }] },
+      { burmese: 'ငါနေကောင်းတယ်', roman: 'nga nei kaung de', translation: "我很好 (I'm fine)", words: [{ my: 'ငါ', roman: 'nga', translation: '我', audio_my: 'ငါ' }, { my: 'နေ', roman: 'nei', translation: '狀態', audio_my: 'နေ' }, { my: 'ကောင်း', roman: 'kaung', translation: '好', audio_my: 'ကောင်း' }, { my: 'တယ်', roman: 'de', translation: '助詞', audio_my: 'တယ်' }] },
       { burmese: 'ငါမနေကောင်းဘူး', roman: 'nga ma nei kaung bu', translation: "我不好 (I'm not fine)", words: [{ my: 'ငါ', roman: 'nga', translation: '我', audio_my: 'ငါ' }, { my: 'မ', roman: 'ma', translation: '否定', audio_my: 'မ' }, { my: 'နေ', roman: 'nei', translation: '狀態', audio_my: 'နေ' }, { my: 'ကောင်း', roman: 'kaung', translation: '好', audio_my: 'ကောင်း' }, { my: 'ဘူး', roman: 'bu', translation: '否定語氣詞', audio_my: 'ဘူး' }] }
     ],
     '購物 (Shopping)': [
@@ -355,7 +346,7 @@ function App() {
       { burmese: 'ဘယ်လို?', roman: 'be lo?', translation: '誰？ (Who?)', words: [{ my: 'ဘယ်လို', roman: 'be lo', translation: '怎樣', audio_my: 'ဘယ်လို' }] },
       { burmese: 'ဘယ်လို?', roman: 'be lo?', translation: '哪裡？ (Where?)', words: [{ my: 'ဘယ်လို', roman: 'be lo', translation: '怎樣', audio_my: 'ဘယ်လို' }] },
       { burmese: 'ဘယ်လိုခွဲခြားလဲ?', roman: 'be lo hkwai khe la?', translation: '什麼時候？ (When?)', words: [{ my: 'ဘယ်လို', roman: 'be lo', translation: '怎樣', audio_my: 'ဘယ်လို' }, { my: 'ခွဲ', roman: 'hkwai', translation: '分開', audio_my: 'ခွဲ' }, { my: 'ခြား', roman: 'khe', translation: '區別', audio_my: 'ခြား' }, { my: 'လဲ', roman: 'la', translation: '疑問詞', audio_my: 'လဲ' }] },
-      { burmese: 'ငါမသိတယ်', roman: 'nga ma sit de', translation: "我不知道 (I'm not sure)", words: [{ my: 'ငါ', roman: 'nga', translation: '我', audio_my: 'ငါ' }, { my: 'မ', roman: 'ma', translation: '否定', audio_my: 'မ' }, { my: 'သိ', roman: 'sit', translation: '知道', audio_my: 'သိ' }, { my: 'တယ်', roman: 'de', translation: '助詞', audio_my: 'တယ်' }] },
+      { burmese: 'ငါမသိတယ်', roman: 'nga ma sit de', translation: "我不知道 (I\'m not sure)", words: [{ my: 'ငါ', roman: 'nga', translation: '我', audio_my: 'ငါ' }, { my: 'မ', roman: 'ma', translation: '否定', audio_my: 'မ' }, { my: 'သိ', roman: 'sit', translation: '知道', audio_my: 'သိ' }, { my: 'တယ်', roman: 'de', translation: '助詞', audio_my: 'တယ်' }] },
       { burmese: 'ဒါဘယ်လိုလဲ?', roman: 'da be lo le?', translation: '這是什麼？ (What is this?)', words: [{ my: 'ဒါ', roman: 'da', translation: '這', audio_my: 'ဒါ' }, { my: 'ဘယ်လို', roman: 'be lo', translation: '怎樣', audio_my: 'ဘယ်လို' }, { my: 'လဲ', roman: 'le', translation: '疑問詞', audio_my: 'လဲ' }] },
       { burmese: 'ဟိုဘယ်လိုလဲ?', roman: 'ho be lo le?', translation: '那是什麼？ (What is that?)', words: [{ my: 'ဟို', roman: 'ho', translation: '那', audio_my: 'ဟို' }, { my: 'ဘယ်လို', roman: 'be lo', translation: '怎樣', audio_my: 'ဘယ်လို' }, { my: 'လဲ', roman: 'le', translation: '疑問詞', audio_my: 'လဲ' }] },
       { burmese: 'ဘယ်လောက်?', roman: 'be laut?', translation: '多少？ (How much?)', words: [{ my: 'ဘယ်လောက်', roman: 'be laut', translation: '多少', audio_my: 'ဘယ်လောက်' }] },
@@ -422,23 +413,28 @@ function App() {
     'Shopping': '購物/金錢',
     '購物 (Shopping)': '購物/金錢',
     '購物/金錢': '購物/金錢',
+    '金額與時間表達': '購物/金錢',
     '問路': '問路/觀光',
     '觀光/問路': '問路/觀光',
     '方向與地點': '問路/觀光',
+    '交通詞彙': '問路/觀光',
     '問候': '問候/禮貌與回應',
     '問候/禮貌': '問候/禮貌與回應',
     '表達與回應 (Expressions & Responses)': '問候/禮貌與回應',
     '表達與回應': '問候/禮貌與回應',
+    '旅遊實用詞彙': '問候/禮貌與回應',
+    '基本問候 (Basic Greetings)': '問候/禮貌與回應',
     '時間與日期': '時間/天氣/基礎詞',
     '天氣與自然': '時間/天氣/基礎詞',
     '疑問詞': '疑問/基礎詞',
     '疑問詞 (Question Words)': '疑問/基礎詞',
     '人稱代詞 (Pronouns)': '代詞/基礎詞',
     '指示代詞 (Demonstratives)': '代詞/基礎詞',
+    '基礎動詞與日常詞彙': '基礎詞彙',
     '大小與數量': '數量/大小',
     '數字': '數量/大小',
+    '數字與顏色': '數量/大小',
     '其他常用語': '其他常用語',
-    '基本問候 (Basic Greetings)': '問候/禮貌與回應',
     '語言交流 (Language Communication)': '語言交流',
     '求助與協助 (Help & Assistance)': '求助/協助',
     '擁有與需求 (Possession & Desire)': '擁有/需求',
@@ -553,88 +549,29 @@ function App() {
     }
 
     // 回退：使用 Google TTS via new Audio
-    // 智能選擇 TTS 端點，根據環境自動適應
+    // 如果在本機開發環境，指向我們的 proxy endpoint，避免瀏覽器直接向 Google TTS 發生格式或 CORS 問題
     const isLocal = window && window.location && (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1');
-    const isNetlify = window && window.location && (window.location.hostname.includes('netlify.app'));
-    
-    // 生成可能的 TTS URLs（按優先級排序）
-    const urlsToTry = [
-      // 首選：本地開發環境的代理
-      isLocal ? `http://localhost:${config.TTS_PORT}/tts?q=${encodeURIComponent(textToSpeak)}` : null,
-      // 次選：Netlify 函數端點（僅在 Netlify 環境中）
-      isNetlify ? `/tts?q=${encodeURIComponent(textToSpeak)}` : null,
-      // 備用：Netlify 函數端點（完整路徑，僅在 Netlify 環境中）
-      isNetlify ? `/.netlify/functions/tts?q=${encodeURIComponent(textToSpeak)}` : null,
-      // 最後備選：直接 Google TTS（可能因 CORS 被阻止）
-      `https://translate.google.com/translate_tts?ie=UTF-8&q=${encodeURIComponent(textToSpeak)}&tl=my&client=tw-ob`
-    ].filter(url => url !== null); // 過濾掉 null 值
+    const url = isLocal
+      ? `http://localhost:${config.TTS_PORT}/tts?q=${encodeURIComponent(textToSpeak)}`
+      : `https://translate.google.com/translate_tts?ie=UTF-8&q=${encodeURIComponent(textToSpeak)}&tl=my&client=tw-ob`;
 
-    // 調試信息
-    console.log('Environment detection:', {
-      hostname: window?.location?.hostname,
-      isLocal,
-      isNetlify
-    });
-    console.log('TTS URLs to try:', urlsToTry);
-
-    // 嘗試播放音訊的函數
-    const tryPlayUrl = (url, index) => {
-      console.log(`Trying TTS URL[${index}]:`, url);
-      return new Promise((resolve, reject) => {
-        const audio = audioRef.current || new Audio();
-        audio.src = url;
-        
-        // 添加更多的事件監聽器來調試
-        audio.oncanplaythrough = () => {
-          console.log(`Audio can play through URL[${index}]:`, url);
-          resolve({ audio, url, index });
-        };
-        
-        audio.onloadeddata = () => {
-          console.log(`Audio data loaded URL[${index}]:`, url);
-        };
-        
-        audio.onplay = () => {
-          console.log(`Audio started playing URL[${index}]:`, url);
-        };
-        
-        audio.onerror = (e) => {
-          console.warn(`Audio error for URL[${index}]:`, url, e);
-          reject({ error: e, url, index });
-        };
-        
-        const playPromise = audio.play();
-        if (playPromise) {
-          playPromise.catch(e => {
-            console.warn(`Audio play rejected for URL[${index}]:`, url, e);
-            reject({ error: e, url, index });
-          });
-        }
-      });
-    };
-
-    // 依次嘗試所有 URLs
-    const tryAllUrls = async (urls) => {
-      for (let i = 0; i < urls.length; i++) {
-        try {
-          const result = await tryPlayUrl(urls[i], i);
-          console.log(`Successfully played audio with URL[${result.index}]:`, result.url);
-          return result;
-        } catch (error) {
-          console.warn(`Failed to play with URL[${i}]:`, urls[i], error);
-          // 如果是最後一個 URL，則拋出錯誤
-          if (i === urls.length - 1) {
-            throw new Error(`All TTS URLs failed. Last error: ${error.message}`);
-          }
-          // 否則繼續嘗試下一個 URL
-        }
+    try {
+      console.log('speak(): trying Audio fallback with url', url);
+      // Re-using the same audio element is often more reliable.
+      if (audioRef.current) {
+        audioRef.current.src = url;
+        audioRef.current.play().catch((e) => console.warn('audioRef play failed', e));
+      } else {
+        // As a fallback, create a new audio element.
+        const a = new Audio(url);
+        a.volume = 0.98;
+        a.play().catch((err) => {
+            console.warn('New Audio() fallback play() rejected.', err);
+        });
       }
-    };
-
-    // 執行播放嘗試
-    tryAllUrls(urlsToTry).catch((error) => {
-      console.error('All TTS URLs failed to play audio:', error);
-    });
+    } catch (e) {
+      console.warn('Audio fallback creation failed.', e);
+    }
   }
 
   // 測試使用 WebAudio 產生簡短的測試音，用來確認頁面音訊輸出是否正常
@@ -667,6 +604,10 @@ function App() {
   function handleLetterClick(letter) {
     updateDisplay(letter.burmese, letter.roman);
     speak(letter.burmese);
+  }
+
+  function handleWordClick(word) {
+    speak(word);
   }
 
   function playFullSentence(sentence) {

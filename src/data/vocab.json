@@ -1,687 +1,392 @@
 {
-  "日常交際": [
+  "基礎動詞與日常詞彙": [
     {
-      "chinese": "我來自台灣",
-      "burmese": "ကျွန်တော်က ထိုင်ဝမ်ကပါ။",
-      "roman": "kywan naw ka htaing wan ka ba",
-      "category": "日常交際",
-      "notes": ""
+      "chinese": "去 (Go)",
+      "burmese": "သြားေဒ",
+      "roman": "thwa:-de"
     },
     {
-      "chinese": "歡迎你來台灣玩",
-      "burmese": "ထိုင်ဝမ်မှ ကြိုဆိုပါတယ်။",
-      "roman": "htaing wan hma kyoe so ba de",
-      "category": "日常交際",
-      "notes": ""
+      "chinese": "來 (Come)",
+      "burmese": "လာေဒ",
+      "roman": "la-de"
     },
     {
-      "chinese": "這裡有免費wifi嗎？",
-      "burmese": "ဒီမှာ free wifi ရှိလား။",
-      "roman": "di hma free wifi shi la?",
-      "category": "日常交際",
-      "notes": ""
+      "chinese": "吃 (Eat)",
+      "burmese": "စားေဒ",
+      "roman": "sa:-de"
     },
     {
-      "chinese": "請問wifi密碼幾號？",
-      "burmese": "wifi passwordကဘာလဲ။",
-      "roman": "wifi password ka ba le?",
-      "category": "日常交際",
-      "notes": ""
+      "chinese": "公車",
+      "burmese": "ဘတ္(စ)ကား",
+      "roman": "ba’-sa’-ka:"
     },
     {
-      "chinese": "你會說英語嗎？",
-      "burmese": "သင်အင်္ဂလိပ်ပြောနိုင်လား?",
-      "roman": "thang angaleit pyo nai la?",
-      "category": "日常交際",
-      "notes": ""
+      "chinese": "計程車",
+      "burmese": "တက္(က) စီ",
+      "roman": "taxi"
     },
     {
-      "chinese": "我會說一點點。",
-      "burmese": "ငါနည်းနည်းပြောတတ်တယ်",
-      "roman": "nga ne ne pyo tat de",
-      "category": "日常交際",
-      "notes": ""
+      "chinese": "想要 (Want)",
+      "burmese": "လိုခ်င္ေဒ",
+      "roman": "lo-jin-de"
     },
     {
-      "chinese": "我不會說。",
-      "burmese": "ငါမအင်္ဂလိပ်ပြောနိုင်ဘူး",
-      "roman": "nga ma angaleit pyo nai bu",
-      "category": "日常交際",
-      "notes": ""
+      "chinese": "不想要 (I don't want)",
+      "burmese": "ငါမလိုပါ",
+      "roman": "nga ma lo ba"
+    },
+    {
+      "chinese": "太貴了",
+      "burmese": "ေစ်းႀကီးတယ္",
+      "roman": "zei kyi de"
+    },
+    {
+      "chinese": "便宜",
+      "burmese": "ေစ်းခ်ိဳေဒ",
+      "roman": "zei:-cho-de"
+    },
+    {
+      "chinese": "請便宜點",
+      "burmese": "ေစ်းေလွ်ာ့ပါ",
+      "roman": "zei shoh ba"
+    },
+    {
+      "chinese": "喜歡 (I like)",
+      "burmese": "ငါႀကိဳက္တယ္",
+      "roman": "nga kyite de"
+    },
+    {
+      "chinese": "不喜歡 (I don't like)",
+      "burmese": "ငါမႀကိဳက္ဘူး",
+      "roman": "nga ma kyite bu"
+    },
+    {
+      "chinese": "妳很可愛",
+      "burmese": "မင္းကခ်စ္စရာေလး",
+      "roman": "min ka chit sa ya: lei:"
+    },
+    {
+      "chinese": "白天",
+      "burmese": "ေန႕",
+      "roman": "nei’"
+    },
+    {
+      "chinese": "晚上 (夜晚)",
+      "burmese": "ည",
+      "roman": "nya"
+    },
+    {
+      "chinese": "早餐",
+      "burmese": "နံနက္စာ",
+      "roman": "naN neiʔ sa"
+    },
+    {
+      "chinese": "午餐",
+      "burmese": "ေန႕လည္စာ",
+      "roman": "nei' lé sa"
+    },
+    {
+      "chinese": "晚餐",
+      "burmese": "ညစာ",
+      "roman": "nya sa"
+    },
+    {
+      "chinese": "宵夜",
+      "burmese": "ညေစာင္းစာ",
+      "roman": "nya:-zauñ: sa"
+    },
+    {
+      "chinese": "酒 (酒精)",
+      "burmese": "အရက္",
+      "roman": "a-ye’"
+    },
+    {
+      "chinese": "那邊",
+      "burmese": "ဟိုမွာ",
+      "roman": "ho-hma"
+    },
+    {
+      "chinese": "這邊",
+      "burmese": "ဒီမွာ",
+      "roman": "di-hma"
+    },
+    {
+      "chinese": "遠的地方",
+      "burmese": "ေဝးေဒ",
+      "roman": "wei:-de"
+    },
+    {
+      "chinese": "近的地方",
+      "burmese": "နီးေဒ",
+      "roman": "ni:-de"
+    },
+    {
+      "chinese": "開心",
+      "burmese": "ေပ်ာ္တယ္",
+      "roman": "pyau tai"
+    },
+    {
+      "chinese": "難過",
+      "burmese": "ဝမ္းနည္းတယ္",
+      "roman": "wouN né tai"
+    },
+    {
+      "chinese": "舒服",
+      "burmese": "ေနေကာင္းေဒ",
+      "roman": "nei-kaun:-de"
+    },
+    {
+      "chinese": "不舒服",
+      "burmese": "ေနမေကာင္းဘူး",
+      "roman": "nei-mo-kaun:-bu:"
+    },
+    {
+      "chinese": "痛",
+      "burmese": "နာေဒ / ကိုက္ေဒ",
+      "roman": "na-de / kai’-te"
+    },
+    {
+      "chinese": "騙子 (Liar/Swindler)",
+      "burmese": "လိမ်လည်သူ",
+      "roman": "lein-lè: thu"
+    },
+    {
+      "chinese": "好人 (Good person)",
+      "burmese": "လူေကာင္း",
+      "roman": "lu: kaun:"
+    },
+    {
+      "chinese": "壞人 (Bad person)",
+      "burmese": "လူဆိုး",
+      "roman": "lu: hso:"
     }
   ],
-  "觀光/問路": [
+  "交通詞彙": [
     {
-      "chinese": "請問廁所在哪裡？",
-      "burmese": "အိမ်သာဘယ်မှာလဲ?",
-      "roman": "ain hta ba hma le?",
-      "category": "觀光/問路",
-      "notes": "最常用"
+      "chinese": "公車",
+      "burmese": "ဘတ္(စ)ကား",
+      "roman": "ba’-sa’-ka:"
     },
     {
-      "chinese": "請問地鐵在哪裡?",
-      "burmese": "မြေအောက်ရထား ဘယ်မှာလဲ",
-      "roman": "myei auk ya hta ba hma le",
-      "category": "觀光/問路",
-      "notes": ""
+      "chinese": "計程車",
+      "burmese": "တက္(က) စီ",
+      "roman": "taxi"
     },
     {
-      "chinese": "請問在哪裡買票？",
-      "burmese": "လက်မှတ်ဘယ်မှာဝယ်လို့ရပါသလဲ?",
-      "roman": "let hmat be hma wal lo ya ba thale?",
-      "category": "觀光/問路",
-      "notes": ""
+      "chinese": "請帶我去機場",
+      "burmese": "ေလဆိပ္ကိုပို႕ေပးပါ",
+      "roman": "lei: sei' ko: pō: pei: ba"
+    },
+    {
+      "chinese": "從這裡遠嗎？",
+      "burmese": "ဒီကေန ေတာ္ေတာ္ေဝးလား",
+      "roman": "di: ga nei: dau' wai: the lei:"
+    },
+    {
+      "chinese": "請給我收據",
+      "burmese": "ကားျဖတ္ပိုင္းေလးေပးပါ",
+      "roman": "kā: p'ya'k' paiN lei: pei: ba"
+    },
+    {
+      "chinese": "我想去火車站",
+      "burmese": "ဘူတာရုံကိုသြားမယ္",
+      "roman": "bū ta: youN ko: thwa: mei"
+    },
+    {
+      "chinese": "我會坐公車去",
+      "burmese": "ဘတ္(စ)ကားနဲ႕သြားမယ္",
+      "roman": "ba' sa' ka: nae thwa: mei"
     }
   ],
-  "緊急狀況": [
+  "旅遊實用詞彙": [
     {
-      "chinese": "我迷路了，請幫忙我。",
-      "burmese": "ကျွန်တော်လမ်းပျောက်နေလို့ ကျွန်တော့်ကိုကူညီပါအုန်း။",
-      "roman": "kywan naw lan pyaok nei lo kywan naut ko ku nyi ba aun",
-      "category": "緊急狀況",
-      "notes": ""
+      "chinese": "您好",
+      "burmese": "မဂၤလာပါ",
+      "roman": "min ga la ba"
     },
     {
-      "chinese": "我不太舒服請幫幫我!",
-      "burmese": "နေမကောင်းလို့ ကျေးဇူးပြုပြီး ကူညီပေးကြပါ။",
-      "roman": "nei ma kaung lo kyay zu pyu pyi ku nyi pay kya ba",
-      "category": "緊急狀況",
-      "notes": ""
+      "chinese": "再見",
+      "burmese": "သြားေတာ့မယ္",
+      "roman": "thwa: dau mai"
     },
     {
-      "chinese": "我的錢包被偷，可以幫我報警嗎?",
-      "burmese": "ပိုက်ဆံအိတ် ခိုးသွားလို့ ရဲကို ခေါ်ပေးနိုင်မလား။",
-      "roman": "paik san ait kho thwa lo ye ko khol pay nai ma la?",
-      "category": "緊急狀況",
-      "notes": ""
-    },
-    {
-      "chinese": "請幫助我。",
-      "burmese": "ကူညီပါအုန်း။",
-      "roman": "kū ñī pā ōn",
-      "category": "緊急狀況",
-      "notes": "[地道替換]"
-    },
-    {
-      "chinese": "你可以幫我嗎？",
-      "burmese": "သင်ကကျွန်ုပ်ကိုကူညီပေးနိုင်ပါသလား?",
-      "roman": "thang ka kywan nauk ko ku nyi pay nai ba thala?",
-      "category": "緊急狀況",
-      "notes": ""
-    }
-  ],
-  "購物/金錢": [
-    {
-      "chinese": "這個多少錢？",
-      "burmese": "ဒီဟာဘယ်လောက်လဲ?",
-      "roman": "di ha be laut le?",
-      "category": "購物/金錢",
-      "notes": ""
+      "chinese": "對不起",
+      "burmese": "ေတာင္းပန္ပါတယ္",
+      "roman": "tauN pan ba de"
     },
     {
       "chinese": "多少錢？",
-      "burmese": "ဘယ်လောက်လဲ?",
-      "roman": "be laut le?",
-      "category": "購物/金錢",
-      "notes": ""
-    },
-    {
-      "chinese": "太貴了。",
-      "burmese": "ဈေးကြီးတယ်",
-      "roman": "zei kyi de",
-      "category": "購物/金錢",
-      "notes": ""
-    },
-    {
-      "chinese": "便宜點。",
-      "burmese": "ဈေးလျှော့ပါ",
-      "roman": "zei shoh ba",
-      "category": "購物/金錢",
-      "notes": ""
-    },
-    {
-      "chinese": "請問店裡賣的最好的是什麼？",
-      "burmese": "ဆိုင်မှာရောင်းအားအကောင်းဆုံးက ဘာလဲလို့ မေးလို့ ရမလား။",
-      "roman": "sain hma yaung ah a kaung soon ka ba le lo mei lo ya ma la?",
-      "category": "購物/金錢",
-      "notes": ""
-    },
-    {
-      "chinese": "請給我一杯水。",
-      "burmese": "ရေတစ်ခွက်ပေးပါ။",
-      "roman": "yè ta-hkwe' pè pā.",
-      "category": "購物/金錢",
-      "notes": "[地道替換] 請給我一杯水"
-    }
-  ],
-  "問候/禮貌": [
-    {
-      "chinese": "你好。",
-      "burmese": "မင်္ဂလာပါ။",
-      "roman": "mingalaba",
-      "category": "問候/禮貌",
-      "notes": ""
-    },
-    {
-      "chinese": "早上好。",
-      "burmese": "မင်္ဂလာနံနက်ခင်းပါ။",
-      "roman": "mingala nannek khin ba",
-      "category": "問候/禮貌",
-      "notes": ""
-    },
-    {
-      "chinese": "晚上好。",
-      "burmese": "မင်္ဂလာညနေခင်းပါ။",
-      "roman": "mingala nyanei khin ba",
-      "category": "問候/禮貌",
-      "notes": ""
-    },
-    {
-      "chinese": "晚安。",
-      "burmese": "ကောင်းသောညပါ။",
-      "roman": "kaung thaw nya ba",
-      "category": "問候/禮貌",
-      "notes": ""
-    },
-    {
-      "chinese": "再見。",
-      "burmese": "သွားတော့မယ်။",
-      "roman": "thwa daw mel",
-      "category": "問候/禮貌",
-      "notes": "[最常用]"
-    },
-    {
-      "chinese": "待會見。",
-      "burmese": "နောက်မှတွေ့မယ်။",
-      "roman": "nauk hma twè mèl.",
-      "category": "問候/禮貌",
-      "notes": "[地道替換] 稍後見"
-    },
-    {
-      "chinese": "謝謝。",
-      "burmese": "ကျေးဇူးတင်ပါတယ်။",
-      "roman": "kyay zu tin ba de",
-      "category": "問候/禮貌",
-      "notes": ""
-    },
-    {
-      "chinese": "不客氣。",
-      "burmese": "ရှင်ပြုစမ်းပါ။",
-      "roman": "shing pyu zan ba",
-      "category": "問候/禮貌",
-      "notes": ""
-    },
-    {
-      "chinese": "對不起。",
-      "burmese": "ဆောရပါ။",
-      "roman": "sawra ba",
-      "category": "問候/禮貌",
-      "notes": ""
-    },
-    {
-      "chinese": "沒關係。",
-      "burmese": "အားလုံးမဟုတ်တယ်",
-      "roman": "a ma lo moat de",
-      "category": "問候/禮貌",
-      "notes": ""
-    },
-    {
-      "chinese": "請。",
-      "burmese": "ကျေးဇူးပြုပြီး။",
-      "roman": "kyay zu pyu pyi",
-      "category": "問候/禮貌",
-      "notes": ""
-    },
-    {
-      "chinese": "是。",
-      "burmese": "ဟုတ်ကဲ့။",
-      "roman": "hohke",
-      "category": "問候/禮貌",
-      "notes": ""
-    },
-    {
-      "chinese": "不是。",
-      "burmese": "မဟုတ်ဘူး။",
-      "roman": "ma hoh bu",
-      "category": "問候/禮貌",
-      "notes": ""
-    },
-    {
-      "chinese": "可以。",
-      "burmese": "ရပါတယ်။",
-      "roman": "ya ba de",
-      "category": "問候/禮貌",
-      "notes": ""
-    },
-    {
-      "chinese": "不可以。",
-      "burmese": "မရဘူး။",
-      "roman": "ma ya bu",
-      "category": "問候/禮貌",
-      "notes": ""
-    },
-    {
-      "chinese": "你叫什麼名字？",
-      "burmese": "နာမည်ဘယ်လိုခေါ်လဲ?",
-      "roman": "na me be lo khol le?",
-      "category": "問候/禮貌",
-      "notes": ""
-    },
-    {
-      "chinese": "我叫...",
-      "burmese": "ငါ့နာမည်က ... ပါ",
-      "roman": "nga na me ga ... pa",
-      "category": "問候/禮貌",
-      "notes": ""
+      "burmese": "ဒါ ဘယ္ေလာက္လဲ",
+      "roman": "da ba yi' lau'k lai:"
     },
     {
       "chinese": "你好嗎？",
-      "burmese": "နေကောင်းလား?",
-      "roman": "nei kaung la?",
-      "category": "問候/禮貌",
-      "notes": ""
+      "burmese": "ေနေကာင္းလား",
+      "roman": "nei kaun: la:"
     },
     {
-      "chinese": "我很好。",
-      "burmese": "ငါနေကောင်းတယ်",
-      "roman": "nga nei kaung de",
-      "category": "問候/禮貌",
-      "notes": ""
+      "chinese": "哪裡有好吃的餐廳？",
+      "burmese": "စားေသာက္ဆိုင္ေကာင္းေကာင္း ဘယ္မွာရွိပါသလဲ",
+      "roman": "sa: thau' saiN kaun: kaun: bei mha shi: Ba la:"
     },
     {
-      "chinese": "我不好。",
-      "burmese": "ငါမနေကောင်းဘူး",
-      "roman": "nga ma nei kaung bu",
-      "category": "問候/禮貌",
-      "notes": ""
+      "chinese": "請慢一點說",
+      "burmese": "ေျဖးေျဖးေလးေျပာျပပါ",
+      "roman": "pyei: pyei: lei: pyau pa"
     },
     {
-      "chinese": "我明白。",
-      "burmese": "ငါသိပါတယ်",
-      "roman": "ngā thi pā de",
-      "category": "問候/禮貌",
-      "notes": ""
-    },
-    {
-      "chinese": "我不明白。",
-      "burmese": "ငါမသိဘူး",
-      "roman": "ngā ma thi bu",
-      "category": "問候/禮貌",
-      "notes": ""
+      "chinese": "請重複一遍",
+      "burmese": "ထပ္ေျပာျပပါဦး",
+      "roman": "hta' pyau ba aun:"
     }
   ],
-  "時間/天氣": [
+  "數字與顏色": [
     {
-      "chinese": "現在幾點？",
-      "burmese": "အချိန်ဘယ်လောက်လဲ?",
-      "roman": "a khain be laut le?",
-      "category": "時間/天氣",
-      "notes": ""
+      "chinese": "0",
+      "burmese": "၀",
+      "roman": "thoun: nya:"
     },
     {
-      "chinese": "現在。",
-      "burmese": "အခုနေ့",
-      "roman": "akhu ne",
-      "category": "時間/天氣",
-      "notes": ""
+      "chinese": "1",
+      "burmese": "၁",
+      "roman": "ti’"
     },
     {
-      "chinese": "今天。",
-      "burmese": "ယနေ့တွေ",
-      "roman": "yan ne twe",
-      "category": "時間/天氣",
-      "notes": ""
+      "chinese": "2",
+      "burmese": "၂",
+      "roman": "hni’"
     },
     {
-      "chinese": "明天。",
-      "burmese": "မနက်တော့",
-      "roman": "man kaw tau",
-      "category": "時間/天氣",
-      "notes": ""
+      "chinese": "3",
+      "burmese": "၃",
+      "roman": "thoun:"
     },
     {
-      "chinese": "昨天。",
-      "burmese": "မနေ့က",
-      "roman": "man ne ka",
-      "category": "時間/天氣",
-      "notes": ""
+      "chinese": "4",
+      "burmese": "၄",
+      "roman": "lei:"
     },
     {
-      "chinese": "今天天氣怎麼樣？",
-      "burmese": "ယနေ့နေ့မွေးလား?",
-      "roman": "yan ne ne mo le?",
-      "category": "時間/天氣",
-      "notes": ""
+      "chinese": "5",
+      "burmese": "၅",
+      "roman": "nga:"
     },
     {
-      "chinese": "天氣很好。",
-      "burmese": "နေ့လည်းရေးသွားတယ်",
-      "roman": "ne ne lway re thwa de",
-      "category": "時間/天氣",
-      "notes": ""
+      "chinese": "6",
+      "burmese": "၆",
+      "roman": "chauk'"
     },
     {
-      "chinese": "天氣不好。",
-      "burmese": "နေ့လည်းမရေးဘူး",
-      "roman": "ne ne lway ma re bu",
-      "category": "時間/天氣",
-      "notes": ""
+      "chinese": "7",
+      "burmese": "၇",
+      "roman": "khuN-hni’"
     },
     {
-      "chinese": "下雨了。",
-      "burmese": "အနားမှားတယ်",
-      "roman": "ana hma tau de",
-      "category": "時間/天氣",
-      "notes": ""
+      "chinese": "8",
+      "burmese": "၈",
+      "roman": "shi’"
+    },
+    {
+      "chinese": "9",
+      "burmese": "၉",
+      "roman": "ko:"
+    },
+    {
+      "chinese": "10",
+      "burmese": "၁၀",
+      "roman": "ta se:"
+    },
+    {
+      "chinese": "藍色",
+      "burmese": "အပြာ",
+      "roman": "a-pya"
+    },
+    {
+      "chinese": "綠色",
+      "burmese": "အစိမ်း",
+      "roman": "a-seiN:"
+    },
+    {
+      "chinese": "黃色",
+      "burmese": "အဝါ",
+      "roman": "a-wā"
+    },
+    {
+      "chinese": "紅色",
+      "burmese": "အနီ",
+      "roman": "a-ni"
+    },
+    {
+      "chinese": "黑色",
+      "burmese": "အနက်",
+      "roman": "a-ne'"
+    },
+    {
+      "chinese": "白色",
+      "burmese": "အဖြူ",
+      "roman": "a-hpyū"
     }
   ],
-  "代詞/疑問詞": [
+  "金額與時間表達": [
     {
-      "chinese": "我。",
-      "burmese": "ငါ",
-      "roman": "nga",
-      "category": "代詞/疑問詞",
-      "notes": ""
+      "chinese": "元/塊",
+      "burmese": "က်ပ္",
+      "roman": "kya'"
     },
     {
-      "chinese": "你。",
-      "burmese": "သင်",
-      "roman": "thang",
-      "category": "代詞/疑問詞",
-      "notes": ""
+      "chinese": "一千",
+      "burmese": "တစ္ထောင့်",
+      "roman": "ta haun:"
     },
     {
-      "chinese": "他/她。",
-      "burmese": "သူ",
-      "roman": "thu",
-      "category": "代詞/疑問詞",
-      "notes": ""
+      "chinese": "五千",
+      "burmese": "ငါးထောင့်",
+      "roman": "nga: haun:"
     },
     {
-      "chinese": "我們。",
-      "burmese": "ငါတို့",
-      "roman": "nga do",
-      "category": "代詞/疑問詞",
-      "notes": ""
+      "chinese": "一萬",
+      "burmese": "တစ္သောင်း",
+      "roman": "ta thauN:"
     },
     {
-      "chinese": "你們。",
-      "burmese": "သင်တို့",
-      "roman": "thang do",
-      "category": "代詞/疑問詞",
-      "notes": ""
+      "chinese": "十萬",
+      "burmese": "တစ္သိန္း",
+      "roman": "ta théiN:"
     },
     {
-      "chinese": "他們/她們。",
-      "burmese": "သူတို့",
-      "roman": "thu do",
-      "category": "代詞/疑問詞",
-      "notes": ""
+      "chinese": "總共多少錢？",
+      "burmese": "စုစုပေါင်းဘယ်လောက်လဲ",
+      "roman": "su: su: pauN: bai lau’k lai:"
     },
     {
-      "chinese": "這個。",
-      "burmese": "ဒါ",
-      "roman": "da",
-      "category": "代詞/疑問詞",
-      "notes": ""
+      "chinese": "100 緬幣",
+      "burmese": "တစ်ရာက်ပ္",
+      "roman": "ta ya: kya’"
     },
     {
-      "chinese": "哪個？",
-      "burmese": "ဘယ်ဟာလဲ?",
-      "roman": "be ha le?",
-      "category": "代詞/疑問詞",
-      "notes": ""
+      "chinese": "500 緬幣",
+      "burmese": "ငါးရာက်ပ္",
+      "roman": "nga: ya: kya’"
     },
     {
-      "chinese": "這裡。",
-      "burmese": "ဒီမှာ",
-      "roman": "di hma",
-      "category": "代詞/疑問詞",
-      "notes": ""
+      "chinese": "2,500 緬幣",
+      "burmese": "နှစ်ထောင့်ငါးရာက်ပ္",
+      "roman": "hni’ haun: nga: ya: kya’"
     },
     {
-      "chinese": "那裡。",
-      "burmese": "ဟိုမှာ",
-      "roman": "ho hma",
-      "category": "代詞/疑問詞",
-      "notes": ""
+      "chinese": "7,000 緬幣",
+      "burmese": "ခုနစ်ထောင့်က်ပ္",
+      "roman": "khuN-hni’ haun: kya’"
     },
     {
-      "chinese": "誰？",
-      "burmese": "ဘယ်သူလဲ။",
-      "roman": "bè thū lè?",
-      "category": "代詞/疑問詞",
-      "notes": "[已修正]"
+      "chinese": "12,000 緬幣",
+      "burmese": "တစ္သောင်းနှစ်ထောင့်က်ပ္",
+      "roman": "ta thauN: hni’ haun: kya’"
     },
     {
-      "chinese": "哪裡？",
-      "burmese": "ဘယ်နေရာလဲ။",
-      "roman": "bè nè-yā lè?",
-      "category": "代詞/疑問詞",
-      "notes": "[已修正] 地點"
-    },
-    {
-      "chinese": "什麼？",
-      "burmese": "ဘာလဲ။",
-      "roman": "bā lè?",
-      "category": "代詞/疑問詞",
-      "notes": "[已修正]"
-    },
-    {
-      "chinese": "為什麼？",
-      "burmese": "ဘာကြောင့်လဲ။",
-      "roman": "bā jaung' lè?",
-      "category": "代詞/疑問詞",
-      "notes": "[已修正]"
-    },
-    {
-      "chinese": "如何？",
-      "burmese": "ဘယ်လိုလဲ။",
-      "roman": "bè lo lè?",
-      "category": "代詞/疑問詞",
-      "notes": "[已修正] 怎麼樣？"
-    },
-    {
-      "chinese": "多少？",
-      "burmese": "ဘယ်လောက်?",
-      "roman": "be laut?",
-      "category": "代詞/疑問詞",
-      "notes": ""
-    },
-    {
-      "chinese": "多少時間？",
-      "burmese": "ဘယ်လောက်ကြာမလဲ။",
-      "roman": "bè lau' kyā ma lè?",
-      "category": "代詞/疑問詞",
-      "notes": "[已修正] 會持續多久？"
-    },
-    {
-      "chinese": "我不要。",
-      "burmese": "ငါမလိုပါ",
-      "roman": "nga ma lo ba",
-      "category": "代詞/疑問詞",
-      "notes": ""
-    },
-    {
-      "chinese": "我想要。",
-      "burmese": "ငါရိုက်လိုတယ်",
-      "roman": "nga yote lo de",
-      "category": "代詞/疑問詞",
-      "notes": ""
-    },
-    {
-      "chinese": "有。",
-      "burmese": "ရှိသောက်ပါတယ်",
-      "roman": "re thauk ba de",
-      "category": "代詞/疑問詞",
-      "notes": ""
-    },
-    {
-      "chinese": "沒有。",
-      "burmese": "မရှိဘူး",
-      "roman": "ma re bu",
-      "category": "代詞/疑問詞",
-      "notes": ""
-    }
-  ],
-  "數字": [
-    {
-      "chinese": "零",
-      "burmese": "သုည",
-      "roman": "thoun-nyā",
-      "category": "數字",
-      "notes": ""
-    },
-    {
-      "chinese": "一",
-      "burmese": "တစ္",
-      "roman": "tit",
-      "category": "數字",
-      "notes": ""
-    },
-    {
-      "chinese": "二",
-      "burmese": "နွစ္",
-      "roman": "hnit",
-      "category": "數字",
-      "notes": ""
-    },
-    {
-      "chinese": "十",
-      "burmese": "ဆယ္",
-      "roman": "hsè",
-      "category": "數字",
-      "notes": "[已修正]"
-    },
-    {
-      "chinese": "百",
-      "burmese": "ရာ",
-      "roman": "yā",
-      "category": "數字",
-      "notes": ""
-    },
-    {
-      "chinese": "千",
-      "burmese": "ေထာင္",
-      "roman": "htaung",
-      "category": "數字",
-      "notes": ""
-    },
-    {
-      "chinese": "萬",
-      "burmese": "ေသာင္း",
-      "roman": "thaung",
-      "category": "數字",
-      "notes": ""
-    }
-  ],
-  "月份": [
-    {
-      "chinese": "一月",
-      "burmese": "ဇန္နဝါရီလ",
-      "roman": "zan-ná-wārī la",
-      "category": "月份",
-      "notes": ""
-    },
-    {
-      "chinese": "二月",
-      "burmese": "ေဖေဖာ္ဝါရီလ",
-      "roman": "phè-phaw-wārī la",
-      "category": "月份",
-      "notes": ""
-    },
-    {
-      "chinese": "三月",
-      "burmese": "မတ္လ",
-      "roman": "mâ’ la",
-      "category": "月份",
-      "notes": ""
-    },
-    {
-      "chinese": "四月",
-      "burmese": "ဧၿပီလ",
-      "roman": "yè-pī la",
-      "category": "月份",
-      "notes": ""
-    },
-    {
-      "chinese": "十月",
-      "burmese": "ေအာက္တိုဘာလ",
-      "roman": "auk-to-bā la",
-      "category": "月份",
-      "notes": ""
-    },
-    {
-      "chinese": "十一月",
-      "burmese": "ႏိုဝင္ဘာလ",
-      "roman": "nō-wèm-bā la",
-      "category": "月份",
-      "notes": "[已修正]"
-    },
-    {
-      "chinese": "十二月",
-      "burmese": "ဒီဇင္ဘာလ",
-      "roman": "dī-zin-bā la",
-      "category": "月份",
-      "notes": ""
-    }
-  ],
-  "稱謂": [
-    {
-      "chinese": "爸爸",
-      "burmese": "ေဖေဖ",
-      "roman": "phè-phè",
-      "category": "稱謂",
-      "notes": ""
-    },
-    {
-      "chinese": "媽媽",
-      "burmese": "ေမေမ",
-      "roman": "mè-mè",
-      "category": "稱謂",
-      "notes": ""
-    },
-    {
-      "chinese": "兒子",
-      "burmese": "သား",
-      "roman": "thā",
-      "category": "稱謂",
-      "notes": ""
-    },
-    {
-      "chinese": "女兒",
-      "burmese": "သမီး",
-      "roman": "thă-mī",
-      "category": "稱謂",
-      "notes": ""
-    },
-    {
-      "chinese": "哥哥",
-      "burmese": "ကိုကို",
-      "roman": "ko-ko",
-      "category": "稱謂",
-      "notes": ""
-    },
-    {
-      "chinese": "姊姊",
-      "burmese": "မမ",
-      "roman": "ma-ma",
-      "category": "稱謂",
-      "notes": ""
-    },
-    {
-      "chinese": "弟弟",
-      "burmese": "ညီေလး",
-      "roman": "ñī-lè",
-      "category": "稱謂",
-      "notes": ""
-    },
-    {
-      "chinese": "妹妹",
-      "burmese": "ညီမေလး",
-      "roman": "ñī-mă-lè",
-      "category": "稱謂",
-      "notes": ""
+      "chinese": "50,000 緬幣",
+      "burmese": "ငါးသောင်းက်ပ္",
+      "roman": "nga: thauN: kya’"
     }
   ]
 }

@@ -562,22 +562,43 @@ function App() {
       console.debug(`Using TTS port ${ttsPort} for local development`);
     }
 
-    const url = isLocal
-      ? `http://localhost:${ttsPort}/tts?q=${encodeURIComponent(textToSpeak)}`
-      : `https://translate.google.com/translate_tts?ie=UTF-8&q=${encodeURIComponent(textToSpeak)}&tl=my&client=tw-ob`;
+    // Use Netlify function as proxy for TTS in both local and production environments
+    // This avoids CORS issues with direct Google TTS requests
+    const baseUrl = isLocal 
+      ? `http://localhost:${ttsPort}` 
+      : '';
+    const url = `${baseUrl}/tts?q=${encodeURIComponent(textToSpeak)}`;
 
     try {
       console.log('speak(): trying Audio fallback with url', url);
       // Re-using the same audio element is often more reliable.
       if (audioRef.current) {
         audioRef.current.src = url;
-        audioRef.current.play().catch((e) => console.warn('audioRef play failed', e));
+        audioRef.current.play().catch((e) => {
+          console.warn('audioRef play failed', e);
+          // Try direct Google TTS as final fallback
+          const fallbackUrl = `https://translate.google.com/translate_tts?ie=UTF-8&q=${encodeURIComponent(textToSpeak)}&tl=my&client=tw-ob`;
+          console.log('Trying direct Google TTS as fallback:', fallbackUrl);
+          const fallbackAudio = new Audio(fallbackUrl);
+          fallbackAudio.volume = 0.98;
+          fallbackAudio.play().catch((fallbackErr) => {
+            console.error('Direct Google TTS also failed:', fallbackErr);
+          });
+        });
       } else {
         // As a fallback, create a new audio element.
         const a = new Audio(url);
         a.volume = 0.98;
         a.play().catch((err) => {
             console.warn('New Audio() fallback play() rejected.', err);
+            // Try direct Google TTS as final fallback
+            const fallbackUrl = `https://translate.google.com/translate_tts?ie=UTF-8&q=${encodeURIComponent(textToSpeak)}&tl=my&client=tw-ob`;
+            console.log('Trying direct Google TTS as fallback:', fallbackUrl);
+            const fallbackAudio = new Audio(fallbackUrl);
+            fallbackAudio.volume = 0.98;
+            fallbackAudio.play().catch((fallbackErr) => {
+              console.error('Direct Google TTS also failed:', fallbackErr);
+            });
         });
       }
     } catch (e) {

@@ -1,4 +1,4 @@
-import React, { useRef, useState, useEffect } from 'react';
+import React, { useRef, useState, useEffect, useCallback } from 'react';
 import './App.css';
 import vocab from './data/vocab.json';
 
@@ -698,7 +698,7 @@ function App() {
   }
   
   // Preload audio for current and adjacent items
-  function preloadRelevantAudio() {
+  const preloadRelevantAudio = useCallback(() => {
     if (page === 'alphabet') {
       // For alphabet page, preload current and nearby letters
       const currentIndex = consonants.findIndex(c => c.burmese === selected.burmese);
@@ -718,7 +718,7 @@ function App() {
         });
       });
     }
-  }
+  }, [page, selected, consonants, categorizedSentences, preloadAudio]);
   
   function playFullSentence(sentence) {
     // Check if we have a preloaded version

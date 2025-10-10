@@ -1,4 +1,4 @@
-import React, { useRef, useState, useEffect, useCallback } from 'react';
+import React, { useRef, useState, useEffect, useCallback, useMemo } from 'react';
 import './App.css';
 import vocab from './data/vocab.json';
 
@@ -55,13 +55,13 @@ function App() {
     document.addEventListener('touchstart', unlockAudio);
     document.addEventListener('keydown', unlockAudio);
 
+    const audioRefs = preloadedAudioRefs.current;
     return () => {
       document.removeEventListener('click', unlockAudio);
       document.removeEventListener('touchstart', unlockAudio);
       document.removeEventListener('keydown', unlockAudio);
       
       // Clean up preloaded audio elements to prevent memory leaks
-      const audioRefs = preloadedAudioRefs.current;
       audioRefs.forEach(audioElement => {
         audioElement.pause();
         audioElement.src = '';
@@ -70,7 +70,7 @@ function App() {
     };
   }, []); // Empty dependency array ensures this runs only once on mount.
 
-  const consonants = [
+  const consonants = useMemo(() => [
     { burmese: 'က', roman: 'ka' },
     { burmese: 'ခ', roman: 'kha' },
     { burmese: 'ဂ', roman: 'ga' },
@@ -105,9 +105,9 @@ function App() {
     { burmese: 'ဟ', roman: 'ha' },
     { burmese: 'ဠ', roman: 'la2' },
     { burmese: 'အ', roman: 'a' }
-  ];
+  ], []);
 
-  const categorizedSentences = {
+  const categorizedSentences = useMemo(() => ({
     '基本問候 (Basic Greetings)': [
       {
         burmese: 'မင်္ဂလာပါ',
@@ -411,7 +411,7 @@ function App() {
       { burmese: 'ဟယ်လို', roman: 'he lo', translation: '你好 (Hello)', words: [{ my: 'ဟယ်လို', roman: 'he lo', translation: '喂', audio_my: 'ဟယ်လို' }] },
       { burmese: 'ဘယ်လိုလဲ', roman: 'be lo le', translation: '再見 (Goodbye)', words: [{ my: 'ဘယ်လို', roman: 'be lo', translation: '怎樣', audio_my: 'ဘယ်လို' }, { my: 'လဲ', roman: 'le', translation: '疑問詞', audio_my: 'လဲ' }] }
     ]
-  };
+  }), []);
 
   // ...existing code...
 
@@ -495,6 +495,51 @@ function App() {
   // 分類列表與目前選擇的分類（預設選第一個分類以避免一次顯示太多）
   const categories = Object.keys(mergedSentences || {});
   const [selectedCategory, setSelectedCategory] = useState('all');
+
+  // Preload audio for a given text
+  const preloadAudio = useCallback((textToSpeak) => {
+    // Don't preload if already cached
+    if (preloadedAudioRefs.current.has(textToSpeak)) {
+      return;
+    }
+    
+    // Create a new audio element for preloading
+    const isLocal = window && window.location && (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1');
+    const ttsPort = process.env.REACT_APP_TTS_PORT || 3001;
+    const baseUrl = isLocal ? `http://localhost:${ttsPort}` : '';
+    const url = `${baseUrl}/tts?q=${encodeURIComponent(textToSpeak)}`;
+    
+    const audioElement = new Audio(url);
+    audioElement.preload = 'auto'; // Hint to browser to preload
+    
+    // Store reference for later use
+    preloadedAudioRefs.current.set(textToSpeak, audioElement);
+    
+    console.log('Preloading audio for:', textToSpeak);
+  }, []);
+  
+  // Preload audio for current and adjacent items
+  const preloadRelevantAudio = useCallback(() => {
+    if (page === 'alphabet') {
+      // For alphabet page, preload current and nearby letters
+      const currentIndex = consonants.findIndex(c => c.burmese === selected.burmese);
+      const start = Math.max(0, currentIndex - 2);
+      const end = Math.min(consonants.length - 1, currentIndex + 2);
+      
+      for (let i = start; i <= end; i++) {
+        preloadAudio(consonants[i].burmese);
+      }
+    } else if (page === 'sentences') {
+      // For sentences page, preload sentences in the same category
+      // This is a simplified implementation - in a real app, you might want to preload
+      // sentences based on the current scroll position or selected category
+      Object.values(categorizedSentences).forEach(category => {
+        category.slice(0, 3).forEach(sentence => {
+          preloadAudio(sentence.burmese);
+        });
+      });
+    }
+  }, [page, selected.burmese, consonants, categorizedSentences, preloadAudio]);
 
   useEffect(() => {
     if ((selectedCategory === 'all' || !selectedCategory) && categories.length > 0) {
@@ -675,50 +720,7 @@ function App() {
     speak(word);
   }
 
-  // Preload audio for a given text
-  function preloadAudio(textToSpeak) {
-    // Don't preload if already cached
-    if (preloadedAudioRefs.current.has(textToSpeak)) {
-      return;
-    }
-    
-    // Create a new audio element for preloading
-    const isLocal = window && window.location && (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1');
-    const ttsPort = process.env.TTS_PORT || 3001;
-    const baseUrl = isLocal ? `http://localhost:${ttsPort}` : '';
-    const url = `${baseUrl}/tts?q=${encodeURIComponent(textToSpeak)}`;
-    
-    const audioElement = new Audio(url);
-    audioElement.preload = 'auto'; // Hint to browser to preload
-    
-    // Store reference for later use
-    preloadedAudioRefs.current.set(textToSpeak, audioElement);
-    
-    console.log('Preloading audio for:', textToSpeak);
-  }
-  
-  // Preload audio for current and adjacent items
-  const preloadRelevantAudio = useCallback(() => {
-    if (page === 'alphabet') {
-      // For alphabet page, preload current and nearby letters
-      const currentIndex = consonants.findIndex(c => c.burmese === selected.burmese);
-      const start = Math.max(0, currentIndex - 2);
-      const end = Math.min(consonants.length - 1, currentIndex + 2);
-      
-      for (let i = start; i <= end; i++) {
-        preloadAudio(consonants[i].burmese);
-      }
-    } else if (page === 'sentences') {
-      // For sentences page, preload sentences in the same category
-      // This is a simplified implementation - in a real app, you might want to preload
-      // sentences based on the current scroll position or selected category
-      Object.values(categorizedSentences).forEach(category => {
-        category.slice(0, 3).forEach(sentence => {
-          preloadAudio(sentence.burmese);
-        });
-      });
-    }
-  }, [page, selected, consonants, categorizedSentences, preloadAudio]);
+
   
   function playFullSentence(sentence) {
     // Check if we have a preloaded version
